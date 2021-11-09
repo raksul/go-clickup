@@ -1,5 +1,5 @@
-# go-client
-[Go](https://golang.org/) client library for [ClickUp](https://clickup.com/).
+# go-clickup
+This is unofficial [Go](https://golang.org/) client library for [ClickUp](https://clickup.com/).
 
 ## Features
 - Create space, folder, list, task and more.
@@ -223,3 +223,6 @@ Contribution, in any kind of way, is highly welcome! It doesn't matter if you ar
 - Writing test code
 
 If you are new to pull requests, checkout Collaborating on projects using issues and pull requests / Creating a pull request.
+
+## License
+This project is released under the terms of the [MIT license](http://en.wikipedia.org/wiki/MIT_License).
