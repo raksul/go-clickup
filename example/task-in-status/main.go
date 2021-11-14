@@ -11,7 +11,7 @@ import (
 	"github.com/raksul/go-clickup/clickup"
 )
 
-func fetchTimeInStatus(taskId string, options *clickup.GetTaskOptions) (*clickup.TasksInStatus, error) {
+func fetchTaskInStatus(taskId string, options *clickup.GetTaskOptions) (*clickup.TasksInStatus, error) {
 	api_key := os.Getenv("CLICKUP_API_KEY")
 	client := clickup.NewClient(nil, api_key)
 
@@ -25,13 +25,13 @@ func main() {
 	fmt.Scanf("%s", &taskId)
 
 	options := clickup.GetTaskOptions{}
-	timeInStatus, err := fetchTimeInStatus(taskId, &options)
+	taskInStatus, err := fetchTaskInStatus(taskId, &options)
 	if err != nil {
 		fmt.Printf("Error: %v\n", err)
 		return
 	}
 
-	for _, v := range timeInStatus.StatusHistory {
+	for _, v := range taskInStatus.StatusHistory {
 		fmt.Println(v.Status, v.TotalTime.ByMinute)
 	}
 }
