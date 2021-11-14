@@ -178,7 +178,6 @@ cat > main.go <<-END
 
   import (
 	  "context"
-	  "strconv"
 
 	  "github.com/raksul/go-clickup/clickup"
   )
@@ -193,18 +192,17 @@ cat > main.go <<-END
 		  println(member.User.ID)
 		  println(member.User.Username)
 	  }
+    println(teams[0].ID)
 
-	  teamID, _ := strconv.Atoi(teams[0].ID)
+	  spaces, _, _ := client.Spaces.GetSpaces(context.Background(), teams[0].ID)
+	  println(spaces[0].ID)
 
-	  spaces, _, _ := client.Spaces.GetSpaces(context.Background(), teamID)
-	  spaceID, _ := strconv.Atoi(spaces[0].ID)
-	  println(spaceID)
-
-	  space, _, _ := client.Spaces.GetSpace(context.Background(), spaceID)
+	  space, _, _ := client.Spaces.GetSpace(context.Background(), spaces[0].ID)
 	  println(space.Name)
   }
 END
 
+go mod tidy
 go run main.go
 ```
 
