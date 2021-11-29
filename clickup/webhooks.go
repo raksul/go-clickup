@@ -98,7 +98,7 @@ func (s *WebhooksService) GetWebhook(ctx context.Context, teamID int) ([]Webhook
 
 func (s *WebhooksService) CreateWebhook(ctx context.Context, teamID int, webhookReq *WebhookRequest) (*WebhookResponse, *Response, error) {
 	u := fmt.Sprintf("team/%v/webhook", teamID)
-	req, err := s.client.NewRequest("POST", u, teamID)
+	req, err := s.client.NewRequest("POST", u, webhookReq)
 	if err != nil {
 		return nil, nil, err
 	}
