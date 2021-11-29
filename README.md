@@ -144,11 +144,11 @@ https://clickup.com/api
   - [ ] Get View Tasks
   - [ ] Update View
   - [ ] Delete View
-- [ ] Webhooks
-  - [ ] Create Webhook
-  - [ ] Update Webhook
-  - [ ] Delete Webhook
-  - [ ] Get Webhooks
+- [x] Webhooks
+  - [x] Create Webhook
+  - [x] Update Webhook
+  - [x] Delete Webhook
+  - [x] Get Webhooks
 
 ## Requirements
 - Go >= 1.16
