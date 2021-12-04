@@ -47,7 +47,7 @@ type WebhookRequest struct {
 	Status   string   `json:"status,omitempty"`
 	TaskID   string   `json:"task_id,omitempty"`
 	ListID   int      `json:"list_id,omitempty"`
-	FolderID string   `json:"folder_id,string"`
+	FolderID string   `json:"folder_id,omitempty"`
 	SpaceID  string   `json:"space_id,omitempty"`
 }
 
