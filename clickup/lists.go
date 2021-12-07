@@ -146,7 +146,7 @@ func (s *ListsService) DeleteList(ctx context.Context, listID string) (*Response
 
 // The status included in the body of the response refers to the List color rather than the task Statuses available in the List.
 func (s *ListsService) GetLists(ctx context.Context, folderID string, archived bool) ([]List, *Response, error) {
-	urlStr := fmt.Sprintf("folder/%s/list?archived=%T", folderID, archived)
+	urlStr := fmt.Sprintf("folder/%s/list?archived=%v", folderID, archived)
 	req, err := s.client.NewRequest("GET", urlStr, nil)
 
 	var (
@@ -169,7 +169,7 @@ func (s *ListsService) GetLists(ctx context.Context, folderID string, archived b
 
 // The status included in the body of the response refers to the List color rather than the task Statuses available in the List.
 func (s *ListsService) GetFolderlessLists(ctx context.Context, spaceID string, archived bool) ([]List, *Response, error) {
-	urlStr := fmt.Sprintf("space/%s/list?archived=%T", spaceID, archived)
+	urlStr := fmt.Sprintf("space/%s/list?archived=%v", spaceID, archived)
 	req, err := s.client.NewRequest("GET", urlStr, nil)
 
 	var (

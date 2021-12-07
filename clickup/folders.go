@@ -115,7 +115,7 @@ func (s *FoldersService) DeleteFolder(ctx context.Context, folderID int) (*Respo
 }
 
 func (s *FoldersService) GetFolders(ctx context.Context, spaceID string, archived bool) ([]Folder, *Response, error) {
-	u := fmt.Sprintf("space/%s/folder?archived=%T", spaceID, archived)
+	u := fmt.Sprintf("space/%s/folder?archived=%v", spaceID, archived)
 	req, err := s.client.NewRequest("GET", u, nil)
 	if err != nil {
 		return nil, nil, err
