@@ -27,9 +27,13 @@ type Attachment struct {
 	FileName string
 	Reader   io.Reader
 }
+
+// If you want to reference a task by it's custom task id, this value must be true.
+// team_id is only used when the parameter is set to custom_task_ids=trueExample.
+// Example: custom_task_ids=true&team_id=123
 type TaskAttachementOptions struct {
-	CustomTaskIDs string `url:"custom_task_ids,omitempty"`
-	TeamID        int    `url:"team_id,omitempty"`
+	CustomTaskIDs bool `url:"custom_task_ids,omitempty"`
+	TeamID        int  `url:"team_id,omitempty"`
 }
 
 func (s *AttachmentsService) CreateTaskAttachment(ctx context.Context, taskID string, opts *TaskAttachementOptions, attachment *Attachment) (*CreateAttachmentResponse, *Response, error) {
