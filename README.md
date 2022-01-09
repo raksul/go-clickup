@@ -13,8 +13,8 @@ https://clickup.com/api
 ## TODO
 - [x] Rate Limit
 - [ ] Error Handling
-- [ ] Attachments
-  - [ ] Create Task Attachment
+- [x] Attachments
+  - [x] Create Task Attachment
 - [ ] Authorization
   - [ ] Get Access Token
   - [x] Get Authorized User
