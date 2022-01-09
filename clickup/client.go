@@ -44,6 +44,7 @@ type Client struct {
 	common service // Reuse a single struct instead of allocating one for each service on the heap.
 
 	// Services used for talking to different parts of the Clickup API.
+	Attachments   *AttachmentsService
 	Authorization *AuthorizationService
 	Checklists    *ChecklistsService
 	Comments      *CommentsService
@@ -121,6 +122,7 @@ func NewClient(httpClient *http.Client, APIKey string) *Client {
 
 	c := &Client{client: httpClient, BaseURL: baseURL, UserAgent: userAgent, APIKey: APIKey}
 	c.common.client = c
+	c.Attachments = (*AttachmentsService)(&c.common)
 	c.Authorization = (*AuthorizationService)(&c.common)
 	c.Checklists = (*ChecklistsService)(&c.common)
 	c.Comments = (*CommentsService)(&c.common)
@@ -176,6 +178,29 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 	if c.UserAgent != "" {
 		req.Header.Set("User-Agent", c.UserAgent)
 	}
+	return req, nil
+}
+
+func (c *Client) NewMultiPartRequest(method, urlStr string, buf *bytes.Buffer) (*http.Request, error) {
+	if !strings.HasSuffix(c.BaseURL.Path, "/") {
+		return nil, fmt.Errorf("BaseURL must have a trailing slash, but %q does not", c.BaseURL)
+	}
+	u, err := c.BaseURL.Parse(urlStr)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequest(method, u.String(), buf)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Header.Set("Authorization", c.APIKey)
+
+	if c.UserAgent != "" {
+		req.Header.Set("User-Agent", c.UserAgent)
+	}
+
 	return req, nil
 }
 
