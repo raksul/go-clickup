@@ -2,7 +2,6 @@ package clickup
 
 import (
 	"context"
-	"encoding/json"
 	"fmt"
 )
 
@@ -58,12 +57,7 @@ func (s *CustomFieldsService) SetCustomFieldValue(ctx context.Context, taskID st
 		return nil, err
 	}
 
-	str, err := json.Marshal(value)
-	if err != nil {
-		return nil, err
-	}
-
-	req, err := s.client.NewRequest("POST", u, str)
+	req, err := s.client.NewRequest("POST", u, value)
 	if err != nil {
 		return nil, err
 	}
