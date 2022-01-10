@@ -35,9 +35,9 @@ https://clickup.com/api
   - [x] Get List Comment
   - [x] Update Comment
   - [x] Delete Comment
-- [ ] Custom Fields
+- [x] Custom Fields
   - [x] Get Accessible Custom Fields
-  - [ ] Set Custom Field Value
+  - [x] Set Custom Field Value
   - [x] Remove Custom Field Value
 - [x] Dependencies
   - [x] Add Dependency
