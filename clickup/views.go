@@ -112,7 +112,7 @@ func (s *ViewsService) CreateViewOf(ctx context.Context, viewType ViewType, id s
 		return nil, nil, fmt.Errorf("invalid view type")
 	}
 
-	u := fmt.Sprintf("/%v/%v/view", t, id)
+	u := fmt.Sprintf("%v/%v/view", t, id)
 
 	req, err := s.client.NewRequest("POST", u, view)
 	if err != nil {
@@ -134,7 +134,7 @@ func (s *ViewsService) GetViewsOf(ctx context.Context, viewType ViewType, id str
 		return nil, nil, fmt.Errorf("invalid view type")
 	}
 
-	u := fmt.Sprintf("/%v/%v/view", t, id)
+	u := fmt.Sprintf("%v/%v/view", t, id)
 
 	req, err := s.client.NewRequest("GET", u, nil)
 	if err != nil {
@@ -204,7 +204,7 @@ func (s *ViewsService) UpdateView(ctx context.Context, viewID string, value map[
 }
 
 func (s *ViewsService) DeleteView(ctx context.Context, viewID string) (*Response, error) {
-	u := fmt.Sprintf("/view/%v", viewID)
+	u := fmt.Sprintf("view/%v", viewID)
 
 	req, err := s.client.NewRequest("DELETE", u, nil)
 	if err != nil {
