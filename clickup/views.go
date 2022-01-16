@@ -106,6 +106,28 @@ func (v ViewType) SelectedType() string {
 	}
 }
 
+func (s *ViewsService) CreateViewOf(ctx context.Context, viewType ViewType, id string, view map[string]interface{}) (*View, *Response, error) {
+	t := viewType.SelectedType()
+	if t == "INVALID_TYPE" {
+		return nil, nil, fmt.Errorf("invalid view type")
+	}
+
+	u := fmt.Sprintf("/%v/%v/view", t, id)
+
+	req, err := s.client.NewRequest("POST", u, view)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	vr := new(ViewResponse)
+	resp, err := s.client.Do(ctx, req, vr)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return &vr.View, resp, nil
+}
+
 func (s *ViewsService) GetViewsOf(ctx context.Context, viewType ViewType, id string) ([]View, *Response, error) {
 	t := viewType.SelectedType()
 	if t == "INVALID_TYPE" {
