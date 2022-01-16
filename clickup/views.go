@@ -69,7 +69,7 @@ type View struct {
 	Orderindex  int    `json:"orderindex"`
 }
 
-type GetViewResponse struct {
+type ViewResponse struct {
 	View View `json:"view"`
 }
 
@@ -152,33 +152,25 @@ func (s *ViewsService) GetViewsOf(ctx context.Context, viewType ViewType, id str
 
 func (s *ViewsService) GetView(ctx context.Context, viewID string) (*View, *Response, error) {
 	u := fmt.Sprintf("view/%v", viewID)
-	u, err := addOptions(u, nil)
-	if err != nil {
-		return nil, nil, err
-	}
 
 	req, err := s.client.NewRequest("GET", u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	gvr := new(GetViewResponse)
-	resp, err := s.client.Do(ctx, req, gvr)
+	vr := new(ViewResponse)
+	resp, err := s.client.Do(ctx, req, vr)
 	if err != nil {
 		return nil, resp, err
 	}
 
-	return &gvr.View, resp, nil
+	return &vr.View, resp, nil
 }
 
 // This request will always return paged responses.
 // Each page includes 30 tasks.
 func (s *ViewsService) GetViewTasks(ctx context.Context, viewID string, page int) ([]Task, bool, *Response, error) {
 	u := fmt.Sprintf("view/%v/task?page=%v", viewID, page)
-	u, err := addOptions(u, nil)
-	if err != nil {
-		return nil, false, nil, err
-	}
 
 	req, err := s.client.NewRequest("GET", u, nil)
 	if err != nil {
@@ -213,6 +205,7 @@ func (s *ViewsService) UpdateView(ctx context.Context, viewID string, value map[
 
 func (s *ViewsService) DeleteView(ctx context.Context, viewID string) (*Response, error) {
 	u := fmt.Sprintf("/view/%v", viewID)
+
 	req, err := s.client.NewRequest("DELETE", u, nil)
 	if err != nil {
 		return nil, err
