@@ -194,6 +194,23 @@ func (s *ViewsService) GetViewTasks(ctx context.Context, viewID string, page int
 	return gvtr.Tasks, gvtr.LastPage, resp, nil
 }
 
+func (s *ViewsService) UpdateView(ctx context.Context, viewID string, value map[string]interface{}) (*View, *Response, error) {
+	u := fmt.Sprintf("view/%v", viewID)
+
+	req, err := s.client.NewRequest("PUT", u, value)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	vr := new(ViewResponse)
+	resp, err := s.client.Do(ctx, req, vr)
+	if err != nil {
+		return nil, resp, err
+	}
+
+	return &vr.View, resp, nil
+}
+
 func (s *ViewsService) DeleteView(ctx context.Context, viewID string) (*Response, error) {
 	u := fmt.Sprintf("/view/%v", viewID)
 	req, err := s.client.NewRequest("DELETE", u, nil)
