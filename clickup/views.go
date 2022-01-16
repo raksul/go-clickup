@@ -91,7 +91,7 @@ const (
 	ListView
 )
 
-func (v ViewType) SelectedType() string {
+func (v ViewType) String() string {
 	switch v {
 	case TeamView:
 		return "team"
@@ -107,7 +107,7 @@ func (v ViewType) SelectedType() string {
 }
 
 func (s *ViewsService) CreateViewOf(ctx context.Context, viewType ViewType, id string, view map[string]interface{}) (*View, *Response, error) {
-	t := viewType.SelectedType()
+	t := viewType.String()
 	if t == "INVALID_TYPE" {
 		return nil, nil, fmt.Errorf("invalid view type")
 	}
