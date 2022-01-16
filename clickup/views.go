@@ -129,7 +129,7 @@ func (s *ViewsService) CreateViewOf(ctx context.Context, viewType ViewType, id s
 }
 
 func (s *ViewsService) GetViewsOf(ctx context.Context, viewType ViewType, id string) ([]View, *Response, error) {
-	t := viewType.SelectedType()
+	t := viewType.String()
 	if t == "INVALID_TYPE" {
 		return nil, nil, fmt.Errorf("invalid view type")
 	}
