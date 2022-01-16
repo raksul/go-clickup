@@ -10,6 +10,79 @@ This package is not Clickup API complete (yet).
 ## API doc
 https://clickup.com/api
 
+
+## Requirements
+- Go >= 1.16
+
+
+## Installation
+
+It is go gettable
+```
+go get github.com/raksul/go-clickup
+```
+
+## Example
+
+
+```
+mkdir my-clickup-app && cd my-clickup-app
+
+cat > go.mod <<-END
+  module my-clickup-app
+
+  require github.com/raksul/go-clickup main
+END
+
+cat > main.go <<-END
+  package main
+
+  import (
+	  "context"
+
+	  "github.com/raksul/go-clickup/clickup"
+  )
+
+  func main() {
+	  client := clickup.NewClient(nil, "api_key")
+
+	  teams, _, _ := client.Teams.GetTeams(context.Background())
+	  println(teams[0].Name)
+
+	  for _, member := range teams[0].Members {
+		  println(member.User.ID)
+		  println(member.User.Username)
+	  }
+    println(teams[0].ID)
+
+	  spaces, _, _ := client.Spaces.GetSpaces(context.Background(), teams[0].ID)
+	  println(spaces[0].ID)
+
+	  space, _, _ := client.Spaces.GetSpace(context.Background(), spaces[0].ID)
+	  println(space.Name)
+  }
+END
+
+go mod tidy
+go run main.go
+```
+
+## Code structure
+The code structure of this package was inspired by [google/go-github](https://github.com/google/go-github) and [andygrunwald/go-jira](https://github.com/andygrunwald/go-jira). There is one main part (the client). 
+
+## Contribution
+Bug reports and pull requests are welcome.
+
+Contribution, in any kind of way, is highly welcome! It doesn't matter if you are not able to write code. Creating issues or holding talks and help other people to use go-clickup is contribution, too! A few examples:
+
+- Correct typos in the README / documentation
+- Reporting bugs
+- Implement a new feature or endpoint
+- Sharing the love of go-jira and help people to get use to it
+- Writing test code
+
+If you are new to pull requests, checkout Collaborating on projects using issues and pull requests / Creating a pull request.
+
 ## TODO
 - [x] Rate Limit
 - [ ] Error Handling
@@ -131,96 +204,24 @@ https://clickup.com/api
   - [ ] Edit User On Workspace
   - [ ] Remove User From Workspace
   - [ ] Get User
-- [ ] Views
-  - [ ] Create Team View
-  - [ ] Create Space View
-  - [ ] Create Folder View
-  - [ ] Create List View
-  - [ ] Get Team Views
-  - [ ] Get Space Views
-  - [ ] Get Folder Views
-  - [ ] Get List Views
-  - [ ] Get View
-  - [ ] Get View Tasks
-  - [ ] Update View
-  - [ ] Delete View
+- [x] Views
+  - [x] Create Team View
+  - [x] Create Space View
+  - [x] Create Folder View
+  - [x] Create List View
+  - [x] Get Team Views
+  - [x] Get Space Views
+  - [x] Get Folder Views
+  - [x] Get List Views
+  - [x] Get View
+  - [x] Get View Tasks
+  - [x] Update View
+  - [x] Delete View
 - [x] Webhooks
   - [x] Create Webhook
   - [x] Update Webhook
   - [x] Delete Webhook
   - [x] Get Webhooks
-
-## Requirements
-- Go >= 1.16
-
-
-## Installation
-
-It is go gettable
-```
-go get github.com/raksul/go-clickup
-```
-
-## Example
-
-
-```
-mkdir my-clickup-app && cd my-clickup-app
-
-cat > go.mod <<-END
-  module my-clickup-app
-
-  require github.com/raksul/go-clickup main
-END
-
-cat > main.go <<-END
-  package main
-
-  import (
-	  "context"
-
-	  "github.com/raksul/go-clickup/clickup"
-  )
-
-  func main() {
-	  client := clickup.NewClient(nil, "api_key")
-
-	  teams, _, _ := client.Teams.GetTeams(context.Background())
-	  println(teams[0].Name)
-
-	  for _, member := range teams[0].Members {
-		  println(member.User.ID)
-		  println(member.User.Username)
-	  }
-    println(teams[0].ID)
-
-	  spaces, _, _ := client.Spaces.GetSpaces(context.Background(), teams[0].ID)
-	  println(spaces[0].ID)
-
-	  space, _, _ := client.Spaces.GetSpace(context.Background(), spaces[0].ID)
-	  println(space.Name)
-  }
-END
-
-go mod tidy
-go run main.go
-```
-
-## Code structure
-The code structure of this package was inspired by [google/go-github](https://github.com/google/go-github) and [andygrunwald/go-jira](https://github.com/andygrunwald/go-jira). There is one main part (the client). 
-
-## Contribution
-Bug reports and pull requests are welcome.
-
-Contribution, in any kind of way, is highly welcome! It doesn't matter if you are not able to write code. Creating issues or holding talks and help other people to use go-clickup is contribution, too! A few examples:
-
-- Correct typos in the README / documentation
-- Reporting bugs
-- Implement a new feature or endpoint
-- Sharing the love of go-jira and help people to get use to it
-- Writing test code
-
-If you are new to pull requests, checkout Collaborating on projects using issues and pull requests / Creating a pull request.
 
 ## License
 This project is released under the terms of the [MIT license](http://en.wikipedia.org/wiki/MIT_License).
