@@ -180,9 +180,9 @@ If you are new to pull requests, checkout Collaborating on projects using issues
   - [x] Get Filtered Team Tasks
   - [x] Get Task's Time in Status
   - [x] Get Bulk Tasks' Time in Status
-- [ ] Task Templates
-  - [ ] Get Task Templates
-  - [ ] Create Task From Template
+- [x] Task Templates
+  - [x] Get Task Templates
+  - [x] Create Task From Template
 - [x] Teams
   - [x] Get Teams
 - [ ] Time Tracking 2.0
