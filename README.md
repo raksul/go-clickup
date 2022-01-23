@@ -5,7 +5,7 @@ This is unofficial [Go](https://golang.org/) client library for [ClickUp](https:
 - Create space, folder, list, task and more.
 - Get Space, folder, list, task and more.
 
-This package is not Clickup API complete (yet).
+This package cover almost ClickUp API. For APIs that are not supported, see [Progress](README.md#progress).
 
 ## API doc
 https://clickup.com/api
@@ -83,13 +83,13 @@ Contribution, in any kind of way, is highly welcome! It doesn't matter if you ar
 
 If you are new to pull requests, checkout Collaborating on projects using issues and pull requests / Creating a pull request.
 
-## TODO
+## Progress
 - [x] Rate Limit
 - [ ] Error Handling
 - [x] Attachments
   - [x] Create Task Attachment
-- [ ] Authorization
-  - [ ] Get Access Token
+- [x] Authorization
+  - [x] Get Access Token
   - [x] Get Authorized User
   - [x] Get Authorized Teams
 - [x] Checklists
