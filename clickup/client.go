@@ -44,23 +44,24 @@ type Client struct {
 	common service // Reuse a single struct instead of allocating one for each service on the heap.
 
 	// Services used for talking to different parts of the Clickup API.
-	Attachments   *AttachmentsService
-	Authorization *AuthorizationService
-	Checklists    *ChecklistsService
-	Comments      *CommentsService
-	CustomFields  *CustomFieldsService
-	Dependencies  *DependenciesService
-	Goals         *GoalsService
-	Tasks         *TasksService
-	TaskTemplates *TaskTemplatesService
-	Teams         *TeamsService
-	Spaces        *SpacesService
-	Folders       *FoldersService
-	Lists         *ListsService
-	Members       *MembersService
-	Tags          *TagsService
-	Views         *ViewsService
-	Webhooks      *WebhooksService
+	Attachments     *AttachmentsService
+	Authorization   *AuthorizationService
+	Checklists      *ChecklistsService
+	Comments        *CommentsService
+	CustomFields    *CustomFieldsService
+	Dependencies    *DependenciesService
+	Goals           *GoalsService
+	Tasks           *TasksService
+	TaskTemplates   *TaskTemplatesService
+	Teams           *TeamsService
+	SharedHierarchy *SharedHierarchyService
+	Spaces          *SpacesService
+	Folders         *FoldersService
+	Lists           *ListsService
+	Members         *MembersService
+	Tags            *TagsService
+	Views           *ViewsService
+	Webhooks        *WebhooksService
 }
 
 type service struct {
@@ -134,6 +135,7 @@ func NewClient(httpClient *http.Client, APIKey string) *Client {
 	c.Tasks = (*TasksService)(&c.common)
 	c.TaskTemplates = (*TaskTemplatesService)(&c.common)
 	c.Teams = (*TeamsService)(&c.common)
+	c.SharedHierarchy = (*SharedHierarchyService)(&c.common)
 	c.Spaces = (*SpacesService)(&c.common)
 	c.Folders = (*FoldersService)(&c.common)
 	c.Lists = (*ListsService)(&c.common)
