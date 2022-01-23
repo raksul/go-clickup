@@ -2,9 +2,14 @@ package clickup
 
 import (
 	"context"
+	"fmt"
 )
 
 type AuthorizationService service
+
+type GetAccessTokenResponse struct {
+	AccessToken string `json:"access_token"`
+}
 
 type GetAuthorizedUserResponse struct {
 	User User `json:"user"`
@@ -24,6 +29,24 @@ type User struct {
 	WeekStartDay      int    `json:"week_start_day,omitempty"`
 	GlobalFontSupport bool   `json:"global_font_support"`
 	Timezone          string `json:"timezone"`
+}
+
+// Get access token from Oauth app client id, Oauth app client secret and redirect url.
+func (s *AuthorizationService) GetAccessToken(ctx context.Context, clientID string, clientSecret string, clientCode string) (token string, resp *Response, err error) {
+	u := fmt.Sprintf("oauth/token?client_id=%s&client_secret=%s&code=%s", clientID, clientSecret, clientCode)
+	req, err := s.client.NewRequest("POST", u, nil)
+	if err != nil {
+		return token, nil, err
+	}
+
+	gatr := new(GetAccessTokenResponse)
+	resp, err = s.client.Do(ctx, req, gatr)
+	if err != nil {
+		return token, resp, err
+	}
+	token = gatr.AccessToken
+
+	return
 }
 
 // Get the user that belongs to this token.
