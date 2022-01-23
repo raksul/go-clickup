@@ -156,8 +156,8 @@ If you are new to pull requests, checkout Collaborating on projects using issues
 - [x] Members
   - [x] Get Task Members
   - [x] Get List Members
-- [ ] Shared Hierarchy
-  - [ ] Shared Hierarchy
+- [x] Shared Hierarchy
+  - [x] Shared Hierarchy
 - [x] Spaces
   - [x] Create Space
   - [x] Update Space
