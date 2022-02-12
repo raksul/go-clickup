@@ -1,4 +1,7 @@
 # go-clickup
+
+[![Go Reference](https://pkg.go.dev/badge/github.com/raksul/go-clickup/clickup.svg)](https://pkg.go.dev/github.com/raksul/go-clickup/clickup)
+
 This is unofficial [Go](https://golang.org/) client library for [ClickUp](https://clickup.com/).
 
 ## Features
