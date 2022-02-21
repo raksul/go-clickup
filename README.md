@@ -81,7 +81,7 @@ Contribution, in any kind of way, is highly welcome! It doesn't matter if you ar
 - Correct typos in the README / documentation
 - Reporting bugs
 - Implement a new feature or endpoint
-- Sharing the love of go-jira and help people to get use to it
+- Sharing the love of go-clickup and help people to get use to it
 - Writing test code
 
 If you are new to pull requests, checkout Collaborating on projects using issues and pull requests / Creating a pull request.
