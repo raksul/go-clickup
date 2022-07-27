@@ -54,11 +54,28 @@ type LocationValue struct {
 
 type AutomaticProgressValue struct {
 	PercentCompleted float64
+	TypeConfig       AutomaticProgressTypeConfig
+}
+
+type AutomaticProgressTypeConfig struct {
+	SubtaskRollup bool    `json:"subtask_rollup"`
+	CompleteOn    float64 `json:"complete_on"`
+	Tracking      struct {
+		Subtasks         bool `json:"subtasks"`
+		AssignedComments bool `json:"assigned_comments"`
+		Checklist        bool `json:"checklists"`
+	} `json:"tracking"`
 }
 
 type ManualProgressValue struct {
 	PercentCompleted float64
 	Current          int64
+	TypeConfig       ManualProgressTypeConfig
+}
+
+type ManualProgressTypeConfig struct {
+	Start int64 `json:"start"`
+	End   int64 `json:"end"`
 }
 
 type TaskValue struct {
@@ -187,14 +204,14 @@ func (cf CustomField) GetValue() interface{} {
 
 		return loc
 	case "automatic_progress":
-		prog, ok := getAutomaticProgressValue(cf.Value)
+		prog, ok := getAutomaticProgressValue(cf.Value, cf.TypeConfig)
 		if !ok {
 			return nil
 		}
 
 		return prog
 	case "manual_progress":
-		prog, ok := getManualProgressValue(cf.Value)
+		prog, ok := getManualProgressValue(cf.Value, cf.TypeConfig)
 		if !ok {
 			return nil
 		}
@@ -369,7 +386,7 @@ func getLocationValue(v interface{}) (LocationValue, bool) {
 	return loc, true
 }
 
-func getAutomaticProgressValue(v interface{}) (AutomaticProgressValue, bool) {
+func getAutomaticProgressValue(v interface{}, typeConfig interface{}) (AutomaticProgressValue, bool) {
 	m, ok := v.(map[string]interface{})
 	if !ok {
 		return AutomaticProgressValue{}, false
@@ -385,12 +402,18 @@ func getAutomaticProgressValue(v interface{}) (AutomaticProgressValue, bool) {
 		return AutomaticProgressValue{}, false
 	}
 
+	tc := AutomaticProgressTypeConfig{}
+	if ok := getStructValue(typeConfig, &tc); !ok {
+		return AutomaticProgressValue{}, false
+	}
+
 	return AutomaticProgressValue{
 		PercentCompleted: percent,
+		TypeConfig:       tc,
 	}, true
 }
 
-func getManualProgressValue(v interface{}) (ManualProgressValue, bool) {
+func getManualProgressValue(v interface{}, typeConfig interface{}) (ManualProgressValue, bool) {
 	m, ok := v.(map[string]interface{})
 	if !ok {
 		return ManualProgressValue{}, false
@@ -435,9 +458,15 @@ func getManualProgressValue(v interface{}) (ManualProgressValue, bool) {
 		return ManualProgressValue{}, false
 	}
 
+	tc := ManualProgressTypeConfig{}
+	if ok := getStructValue(typeConfig, &tc); !ok {
+		return ManualProgressValue{}, false
+	}
+
 	return ManualProgressValue{
 		PercentCompleted: percent,
 		Current:          current,
+		TypeConfig:       tc,
 	}, true
 }
 
