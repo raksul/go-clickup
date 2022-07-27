@@ -151,6 +151,24 @@ type LabelOption struct {
 	Color string
 }
 
+type DropDownValue struct {
+	Value      DropDownOption
+	TypeConfig DropDownTypeConfig
+}
+
+type DropDownTypeConfig struct {
+	Default     float64
+	Placeholder string
+	Options     []DropDownOption
+}
+
+type DropDownOption struct {
+	ID         string
+	OrderIndex int
+	Name       string
+	Color      string
+}
+
 func (cf CustomField) GetValue() interface{} {
 	switch cf.Type {
 	case "url", "email", "phone", "text", "short_text":
@@ -254,7 +272,12 @@ func (cf CustomField) GetValue() interface{} {
 
 		return v
 	case "drop_down":
-		// TODO
+		v, ok := getDropDownValue(cf.Value, cf.TypeConfig)
+		if !ok {
+			return nil
+		}
+
+		return v
 	case "labels":
 		v, ok := getLabelValue(cf.Value, cf.TypeConfig)
 		if !ok {
@@ -488,6 +511,33 @@ func getManualProgressValue(v interface{}, typeConfig interface{}) (ManualProgre
 		Current:          current,
 		TypeConfig:       tc,
 	}, true
+}
+
+func getDropDownValue(v, typeConfig interface{}) (DropDownValue, bool) {
+	ind, ok := v.(float64)
+	if !ok {
+		return DropDownValue{}, false
+	}
+
+	i := int(ind)
+
+	tc := DropDownTypeConfig{}
+	if ok := getStructValue(typeConfig, &tc); !ok {
+		return DropDownValue{}, false
+	}
+
+	ddv := DropDownValue{
+		Value:      DropDownOption{},
+		TypeConfig: tc,
+	}
+
+	for _, option := range tc.Options {
+		if option.OrderIndex == i {
+			ddv.Value = option
+		}
+	}
+
+	return ddv, true
 }
 
 func getLabelValue(v, typeConfig interface{}) (LabelValue, bool) {
