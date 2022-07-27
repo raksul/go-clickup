@@ -136,6 +136,21 @@ type AttachmentValue struct {
 
 type AttachmentsValue []AttachmentValue
 
+type LabelValue struct {
+	Values     []LabelOption
+	TypeConfig LabelTypeConfig
+}
+
+type LabelTypeConfig struct {
+	Options []LabelOption
+}
+
+type LabelOption struct {
+	ID    string
+	Label string
+	Color string
+}
+
 func (cf CustomField) GetValue() interface{} {
 	switch cf.Type {
 	case "url", "email", "phone", "text", "short_text":
@@ -241,7 +256,12 @@ func (cf CustomField) GetValue() interface{} {
 	case "drop_down":
 		// TODO
 	case "labels":
-		// TODO
+		v, ok := getLabelValue(cf.Value, cf.TypeConfig)
+		if !ok {
+			return nil
+		}
+
+		return v
 	}
 
 	return nil
@@ -468,6 +488,38 @@ func getManualProgressValue(v interface{}, typeConfig interface{}) (ManualProgre
 		Current:          current,
 		TypeConfig:       tc,
 	}, true
+}
+
+func getLabelValue(v, typeConfig interface{}) (LabelValue, bool) {
+	arr, ok := v.([]interface{})
+	if !ok {
+		return LabelValue{}, false
+	}
+
+	ids := make([]string, len(arr))
+	for i, v := range arr {
+		ids[i] = v.(string)
+	}
+
+	tc := LabelTypeConfig{}
+	if ok := getStructValue(typeConfig, &tc); !ok {
+		return LabelValue{}, false
+	}
+
+	lv := LabelValue{
+		Values:     make([]LabelOption, len(ids)),
+		TypeConfig: tc,
+	}
+
+	for i, id := range ids {
+		for _, option := range tc.Options {
+			if option.ID == id {
+				lv.Values[i] = option
+			}
+		}
+	}
+
+	return lv, true
 }
 
 func getStructValue(src, dst interface{}) bool {
