@@ -24,6 +24,27 @@ type CustomField struct {
 	Value          interface{} `json:"value"`
 }
 
+type CurrencyValue struct {
+	Value      float64
+	TypeConfig CurrencyTypeConfig
+}
+
+type CurrencyTypeConfig struct {
+	Precision    float64 `json:"precision"`
+	CurrencyType string  `json:"currency_type"`
+	Default      float64 `json:"default"`
+}
+
+type EmojiValue struct {
+	Value      int
+	TypeConfig EmojiTypeConfig
+}
+
+type EmojiTypeConfig struct {
+	CodePoint string `json:"code_point"`
+	Count     int    `json:"count"`
+}
+
 type LocationValue struct {
 	Latitude         float64
 	Longitude        float64
@@ -107,20 +128,43 @@ func (cf CustomField) GetValue() interface{} {
 		}
 
 		return str
-	case "number", "currency", "formula":
+	case "number", "formula":
 		num, ok := getFloatValue(cf.Value)
 		if !ok {
 			return nil
 		}
 
 		return num
+	case "currency":
+		num, ok := getFloatValue(cf.Value)
+		if !ok {
+			return nil
+		}
+
+		tc := CurrencyTypeConfig{}
+		if ok := getStructValue(cf.TypeConfig, &tc); !ok {
+			return nil
+		}
+
+		return CurrencyValue{
+			Value:      num,
+			TypeConfig: tc,
+		}
 	case "emoji":
 		num, ok := getIntValue(cf.Value)
 		if !ok {
 			return nil
 		}
 
-		return num
+		tc := EmojiTypeConfig{}
+		if ok := getStructValue(cf.TypeConfig, &tc); !ok {
+			return nil
+		}
+
+		return EmojiValue{
+			Value:      int(num),
+			TypeConfig: tc,
+		}
 	case "date":
 		date, ok := getDateValue(cf.Value)
 		if !ok {
