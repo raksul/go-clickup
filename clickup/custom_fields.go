@@ -136,12 +136,12 @@ type AttachmentValue struct {
 
 type AttachmentsValue []AttachmentValue
 
-type LabelValue struct {
+type LabelsValue struct {
 	Values     []LabelOption
-	TypeConfig LabelTypeConfig
+	TypeConfig LabelsTypeConfig
 }
 
-type LabelTypeConfig struct {
+type LabelsTypeConfig struct {
 	Options []LabelOption
 }
 
@@ -279,7 +279,7 @@ func (cf CustomField) GetValue() interface{} {
 
 		return v
 	case "labels":
-		v, ok := getLabelValue(cf.Value, cf.TypeConfig)
+		v, ok := getLabelsValue(cf.Value, cf.TypeConfig)
 		if !ok {
 			return nil
 		}
@@ -540,10 +540,10 @@ func getDropDownValue(v, typeConfig interface{}) (DropDownValue, bool) {
 	return ddv, true
 }
 
-func getLabelValue(v, typeConfig interface{}) (LabelValue, bool) {
+func getLabelsValue(v, typeConfig interface{}) (LabelsValue, bool) {
 	arr, ok := v.([]interface{})
 	if !ok {
-		return LabelValue{}, false
+		return LabelsValue{}, false
 	}
 
 	ids := make([]string, len(arr))
@@ -551,12 +551,12 @@ func getLabelValue(v, typeConfig interface{}) (LabelValue, bool) {
 		ids[i] = v.(string)
 	}
 
-	tc := LabelTypeConfig{}
+	tc := LabelsTypeConfig{}
 	if ok := getStructValue(typeConfig, &tc); !ok {
-		return LabelValue{}, false
+		return LabelsValue{}, false
 	}
 
-	lv := LabelValue{
+	lv := LabelsValue{
 		Values:     make([]LabelOption, len(ids)),
 		TypeConfig: tc,
 	}
