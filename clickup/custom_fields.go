@@ -119,7 +119,7 @@ type AttachmentValue struct {
 	Type                json.Number
 	Hidden              bool
 	Size                json.Number
-	ParendId            string
+	ParentId            string
 	ParentCommentType   interface{}
 	ParentCommentParent interface{}
 	EmailData           interface{}
