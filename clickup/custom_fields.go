@@ -287,7 +287,7 @@ func (cf CustomField) GetValue() interface{} {
 		return v
 	}
 
-	return nil
+	return cf.Value
 }
 
 func getStringValue(v interface{}) (string, bool) {
