@@ -339,7 +339,7 @@ func getDateValue(v interface{}) (time.Time, bool) {
 		return time.Time{}, false
 	}
 
-	return time.Unix(0, num*int64(time.Millisecond)), true
+	return time.UnixMilli(num), true
 }
 
 func getBoolValue(v interface{}) (bool, bool) {
