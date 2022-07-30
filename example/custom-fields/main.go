@@ -16,7 +16,10 @@ func main() {
 	api_key := os.Getenv("CLICKUP_API_KEY")
 	client := clickup.NewClient(nil, api_key)
 
-	task, _, err := client.Tasks.GetTask(context.Background(), "2v1etep", nil)
+	var taskId string
+	fmt.Print("Enter clickup taskId: ")
+	fmt.Scanf("%s", &taskId)
+	task, _, err := client.Tasks.GetTask(context.Background(), taskId, nil)
 
 	if err != nil {
 		fmt.Printf("Error: %v\n", err)
