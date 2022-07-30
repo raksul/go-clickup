@@ -52,6 +52,7 @@ func TestCustomFieldsService_GetAccessibleCustomFields(t *testing.T) {
 		Type:           "text",
 		DateCreated:    "1566400407303",
 		HideFromGuests: false,
+		TypeConfig:     map[string]interface{}{},
 	}
 	cf2 := CustomField{
 		ID:             "0a52c486-5f05-403b-b4fd-c512ff05131c",
@@ -59,6 +60,7 @@ func TestCustomFieldsService_GetAccessibleCustomFields(t *testing.T) {
 		Type:           "number",
 		DateCreated:    "1565993269460",
 		HideFromGuests: false,
+		TypeConfig:     map[string]interface{}{},
 	}
 	want = append(want, cf1, cf2)
 	if !cmp.Equal(artifacts, want) {

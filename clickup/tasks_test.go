@@ -109,6 +109,8 @@ func TestTasksService_GetTask(t *testing.T) {
 				Type:           "checkbox",
 				DateCreated:    "1622176979540",
 				HideFromGuests: false,
+				TypeConfig:     map[string]interface{}{},
+				Value:          "23",
 			},
 		},
 		List:   ListOfTaskBelonging{ID: "123"},
