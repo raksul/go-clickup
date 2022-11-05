@@ -1,3 +1,7 @@
+// This example shows that the due date of a task can be updated.
+// If you do not specify a due date it will remain the same,
+// and if you specify clickup.NullDate() it will be removed.
+
 package main
 
 import (
