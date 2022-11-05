@@ -44,7 +44,7 @@ func TestCommentsService_CreateTaskComment(t *testing.T) {
 		t.Errorf("Actions.ListArtifacts returned error: %v", err)
 	}
 
-	want := &CreateCommentResponse{ID: "458", HistId: "26508", Date: 1568036964079}
+	want := &CreateCommentResponse{ID: "458", HistId: "26508", Date: NewDateWithUnixTime(1568036964079)}
 	if !cmp.Equal(artifacts, want) {
 		t.Errorf("Actions.ListArtifacts returned %+v, want %+v", artifacts, want)
 	}
