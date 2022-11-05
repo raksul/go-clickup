@@ -608,12 +608,14 @@ func (s *CustomFieldsService) GetAccessibleCustomFields(ctx context.Context, lis
 
 // The accessible fields can be found on the task object from the get task route. This is where you can retrieve the fieldID.
 // If you set tasks, example is as follow.
-// 	value := map[string]interface{}{
-// 		"value": map[string]interface{}{
-//	        "add": []string{"wmq3", "qt15"},
-//    	    "rem": []string{"wxm7"},
-//    	},
-//	}
+//
+//		value := map[string]interface{}{
+//			"value": map[string]interface{}{
+//		        "add": []string{"wmq3", "qt15"},
+//	   	    "rem": []string{"wxm7"},
+//	   	},
+//		}
+//
 // Each value setting is placed at ClickUp API docs.
 func (s *CustomFieldsService) SetCustomFieldValue(ctx context.Context, taskID string, fieldID string, value map[string]interface{}, opts *CustomFieldOptions) (*Response, error) {
 	u := fmt.Sprintf("task/%s/field/%s", taskID, fieldID)
