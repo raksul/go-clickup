@@ -51,7 +51,7 @@ func getTask(ctx context.Context, client *clickup.Client, taskID string) {
 }
 
 func updateTask(ctx context.Context, client *clickup.Client, taskID string, tr *clickup.TaskRequest) {
-	task, _, err := client.Tasks.UpdateTask(ctx, taskID, &clickup.GetTasksOptions{}, tr)
+	task, _, err := client.Tasks.UpdateTask(ctx, taskID, &clickup.GetTaskOptions{}, tr)
 	if err != nil {
 		log.Fatalln(err)
 	}
