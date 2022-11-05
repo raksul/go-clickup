@@ -195,7 +195,7 @@ func (s *TasksService) CreateTask(ctx context.Context, listID string, tr *TaskRe
 }
 
 // FIXME: assignees add/rem
-func (s *TasksService) UpdateTask(ctx context.Context, taskID string, opts *GetTasksOptions, tr *TaskRequest) (*Task, *Response, error) {
+func (s *TasksService) UpdateTask(ctx context.Context, taskID string, opts *GetTaskOptions, tr *TaskRequest) (*Task, *Response, error) {
 	u := fmt.Sprintf("task/%v/", taskID)
 	u, err := addOptions(u, opts)
 	if err != nil {
