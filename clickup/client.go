@@ -516,17 +516,16 @@ func sanitizeURL(uri *url.URL) *url.URL {
 An Error reports more details on an individual error in an ErrorResponse.
 These are the possible validation error codes:
 
-    missing:
-        resource does not exist
-    missing_field:
-        a required field on a resource has not been set
-    invalid:
-        the formatting of a field is invalid
-    already_exists:
-        another resource has the same valid as this field
-    custom:
-        information is set in the Message field of the Error
-
+	missing:
+	    resource does not exist
+	missing_field:
+	    a required field on a resource has not been set
+	invalid:
+	    the formatting of a field is invalid
+	already_exists:
+	    another resource has the same valid as this field
+	custom:
+	    information is set in the Message field of the Error
 */
 type Error struct {
 	Resource string `json:"resource"` // resource on which the error occurred

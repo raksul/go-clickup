@@ -15,7 +15,7 @@ https://clickup.com/api
 
 
 ## Requirements
-- Go >= 1.16
+- Go >= 1.19
 
 
 ## Installation

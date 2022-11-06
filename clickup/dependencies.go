@@ -20,7 +20,7 @@ type AddDependencyOptions struct {
 	TeamID        int    `url:"team_id,omitempty"`
 }
 
-//One and only one of depends_on or dependency_of must be passed in the query params.
+// One and only one of depends_on or dependency_of must be passed in the query params.
 type DeleteDependencyOptions struct {
 	DependsOn     string `url:"depends_on,omitempty"`
 	DependencyOf  string `url:"dependency_of,omitempty"`
