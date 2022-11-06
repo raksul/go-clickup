@@ -18,7 +18,7 @@ type GetGoalResponse struct {
 
 type CreateGoalRequest struct {
 	Name           string `json:"name"`
-	DueDate        int64  `json:"due_date"`
+	DueDate        *Date  `json:"due_date"`
 	Description    string `json:"description"`
 	MultipleOwners bool   `json:"multiple_owners"`
 	Owners         []int  `json:"owners"`
@@ -27,7 +27,7 @@ type CreateGoalRequest struct {
 
 type UpdateGoalRequest struct {
 	Name        string `json:"name"`
-	DueDate     int64  `json:"due_date"`
+	DueDate     *Date  `json:"due_date"`
 	Description string `json:"description"`
 	RemOwners   []int  `json:"rem_owners"`
 	AddOwners   []int  `json:"add_owners"`

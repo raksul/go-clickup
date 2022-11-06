@@ -15,7 +15,7 @@ type GetListsResponse struct {
 type ListRequest struct {
 	Name        string `json:"name"`
 	Content     string `json:"content"`
-	DueDate     int64  `json:"due_date"`
+	DueDate     *Date  `json:"due_date"`
 	DueDateTime bool   `json:"due_date_time"`
 	Priority    int    `json:"priority"`
 	Assignee    int    `json:"assignee"`

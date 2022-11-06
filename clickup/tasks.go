@@ -21,10 +21,10 @@ type TaskRequest struct {
 	Tags                      []string                   `json:"tags,omitempty"`
 	Status                    string                     `json:"status,omitempty"`
 	Priority                  int                        `json:"priority,omitempty"`
-	DueDate                   int64                      `json:"due_date,omitempty"`
+	DueDate                   *Date                      `json:"due_date,omitempty"`
 	DueDateTime               bool                       `json:"due_date_time,omitempty"`
 	TimeEstimate              int                        `json:"time_estimate,omitempty"`
-	StartDate                 int64                      `json:"start_date,omitempty"`
+	StartDate                 *Date                      `json:"start_date,omitempty"`
 	StartDateTime             bool                       `json:"start_date_time,omitempty"`
 	NotifyAll                 bool                       `json:"notify_all,omitempty"`
 	Parent                    string                     `json:"parent,omitempty"`
@@ -57,7 +57,7 @@ type Task struct {
 	Tags            []Tag                  `json:"tags,omitempty"`
 	Parent          string                 `json:"parent"`
 	Priority        TaskPriority           `json:"priority"`
-	DueDate         string                 `json:"due_date,omitempty"`
+	DueDate         *Date                  `json:"due_date,omitempty"`
 	StartDate       string                 `json:"start_date,omitempty"`
 	Points          int                    `json:"points,omitempty"`
 	TimeEstimate    int64                  `json:"time_estimate"`
@@ -159,12 +159,12 @@ type GetTasksOptions struct {
 	Statuses      []string `url:"statuses[],omitempty"`
 	IncludeClosed bool     `url:"include_closed,omitempty"`
 	Assignees     []string `url:"assignees[],omitempty"`
-	DueDateGt     int64    `url:"due_date_gt,omitempty"`
-	DueDateLt     int64    `url:"due_date_lt,omitempty"`
-	DateCreatedGt int64    `url:"date_created_gt,omitempty"`
-	DateCreatedLt int64    `url:"date_created_lt,omitempty"`
-	DateUpdatedGt int64    `url:"date_updated_gt,omitempty"`
-	DateUpdatedLt int64    `url:"date_updated_lt,omitempty"`
+	DueDateGt     *Date    `url:"due_date_gt,omitempty"`
+	DueDateLt     *Date    `url:"due_date_lt,omitempty"`
+	DateCreatedGt *Date    `url:"date_created_gt,omitempty"`
+	DateCreatedLt *Date    `url:"date_created_lt,omitempty"`
+	DateUpdatedGt *Date    `url:"date_updated_gt,omitempty"`
+	DateUpdatedLt *Date    `url:"date_updated_lt,omitempty"`
 }
 
 type GetTaskOptions struct {
