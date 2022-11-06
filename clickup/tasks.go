@@ -159,8 +159,8 @@ type GetTasksOptions struct {
 	Statuses      []string `url:"statuses[],omitempty"`
 	IncludeClosed bool     `url:"include_closed,omitempty"`
 	Assignees     []string `url:"assignees[],omitempty"`
-	DueDateGt     Date     `url:"due_date_gt,omitempty"`
-	DueDateLt     Date     `url:"due_date_lt,omitempty"`
+	DueDateGt     *Date    `url:"due_date_gt,omitempty"`
+	DueDateLt     *Date    `url:"due_date_lt,omitempty"`
 	DateCreatedGt *Date    `url:"date_created_gt,omitempty"`
 	DateCreatedLt *Date    `url:"date_created_lt,omitempty"`
 	DateUpdatedGt *Date    `url:"date_updated_gt,omitempty"`
