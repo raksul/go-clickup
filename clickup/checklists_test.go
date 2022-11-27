@@ -49,7 +49,7 @@ func TestChecklistsService_CreateChecklist(t *testing.T) {
 		t.Errorf("Actions.ListArtifacts returned error: %v", err)
 	}
 
-	want := &Checklist{ID: "b955c4dc-b8a8-48d8-a0c6-b4200788a683", Name: "Checklist", TaskID: "9hz", Orderindex: 0, Resolved: 0, Unresolved: 0, Items: []Item{}}
+	want := &Checklist{ID: "b955c4dc-b8a8-48d8-a0c6-b4200788a683", Name: "Checklist", TaskID: "9hz", Orderindex: "0", Resolved: 0, Unresolved: 0, Items: []Item{}}
 	if !cmp.Equal(artifacts, want) {
 		t.Errorf("Actions.ListArtifacts returned %+v, want %+v", artifacts, want)
 	}
@@ -94,7 +94,7 @@ func TestChecklistsService_EditChecklist(t *testing.T) {
 		t.Errorf("Actions.ListArtifacts returned error: %v", err)
 	}
 
-	want := &Checklist{ID: "b955c4dc-b8a8-48d8-a0c6-b4200788a683", Name: "Updated Checklist", TaskID: "9hz", Orderindex: 5, Resolved: 0, Unresolved: 0, Items: []Item{}}
+	want := &Checklist{ID: "b955c4dc-b8a8-48d8-a0c6-b4200788a683", Name: "Updated Checklist", TaskID: "9hz", Orderindex: "5", Resolved: 0, Unresolved: 0, Items: []Item{}}
 	if !cmp.Equal(artifacts, want) {
 		t.Errorf("Actions.ListArtifacts returned %+v, want %+v", artifacts, want)
 	}
