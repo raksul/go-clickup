@@ -6,7 +6,7 @@ import (
 )
 
 type Point struct {
-	Value json.RawMessage
+	Value json.Number
 
 	IntVal   *int64
 	FloatVal *float64
