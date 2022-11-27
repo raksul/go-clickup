@@ -23,10 +23,10 @@ type ListRequest struct {
 }
 
 type List struct {
-	ID         string `json:"id"`
-	Name       string `json:"name"`
-	Orderindex int    `json:"orderindex"`
-	Content    string `json:"content"`
+	ID         string      `json:"id"`
+	Name       string      `json:"name"`
+	Orderindex json.Number `json:"orderindex"`
+	Content    string      `json:"content"`
 	Status     struct {
 		Status    string `json:"status"`
 		Color     string `json:"color"`
@@ -54,10 +54,10 @@ type List struct {
 		Access bool   `json:"access"`
 	} `json:"space"`
 	Statuses []struct {
-		Status     string `json:"status"`
-		Orderindex int    `json:"orderindex"`
-		Color      string `json:"color"`
-		Type       string `json:"type"`
+		Status     string      `json:"status"`
+		Orderindex json.Number `json:"orderindex"`
+		Color      string      `json:"color"`
+		Type       string      `json:"type"`
 	} `json:"statuses"`
 	InboundAddress  string `json:"inbound_address"`
 	Archived        bool   `json:"archived"`
