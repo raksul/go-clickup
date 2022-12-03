@@ -59,7 +59,7 @@ type Task struct {
 	Priority        TaskPriority           `json:"priority"`
 	DueDate         *Date                  `json:"due_date,omitempty"`
 	StartDate       string                 `json:"start_date,omitempty"`
-	Points          int                    `json:"points,omitempty"`
+	Points          Point                  `json:"points,omitempty"`
 	TimeEstimate    int64                  `json:"time_estimate"`
 	CustomFields    []CustomField          `json:"custom_fields"`
 	Dependencies    []Dependence           `json:"dependencies"`
