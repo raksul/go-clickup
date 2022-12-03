@@ -61,7 +61,7 @@ func TestFoldersService_GetFolders(t *testing.T) {
 	folder1 := Folder{
 		ID:               "457",
 		Name:             "Updated Folder Name",
-		Orderindex:       0,
+		Orderindex:       "0",
 		OverrideStatuses: false,
 		Hidden:           false,
 		Space:            SpaceOfFolderBelonging{ID: "789", Name: "Space Name", Access: true},
@@ -71,7 +71,7 @@ func TestFoldersService_GetFolders(t *testing.T) {
 	folder2 := Folder{
 		ID:               "458",
 		Name:             "Second Folder Name",
-		Orderindex:       1,
+		Orderindex:       "1",
 		OverrideStatuses: false,
 		Hidden:           false,
 		Space:            SpaceOfFolderBelonging{ID: "789", Name: "Space Name", Access: true},
@@ -117,7 +117,7 @@ func TestFoldersService_GetFolder(t *testing.T) {
 	want := &Folder{
 		ID:               "457",
 		Name:             "Updated Folder Name",
-		Orderindex:       0,
+		Orderindex:       "0",
 		OverrideStatuses: false,
 		Hidden:           false,
 		Space:            SpaceOfFolderBelonging{ID: "789", Name: "Space Name", Access: true},

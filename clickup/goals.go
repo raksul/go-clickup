@@ -85,13 +85,13 @@ type Goal struct {
 	DateUpdated      string       `json:"date_updated"`
 	LastUpdate       string       `json:"last_update"`
 	FolderID         string       `json:"folder_id"`
-	FolderAccess     string       `json:"folder_access,omitempty"`
+	FolderAccess     bool         `json:"folder_access,omitempty"`
 	Pinned           bool         `json:"pinned"`
 	Owners           []GoalOwner  `json:"owners"`
 	KeyResultCount   int          `json:"key_result_count"`
 	Members          []GoalMember `json:"members"`
 	GroupMembers     []GoalMember `json:"group_members"`
-	PercentCompleted int          `json:"percent_completed"`
+	PercentCompleted float64      `json:"percent_completed"`
 }
 
 type GoalOwner struct {
@@ -123,7 +123,7 @@ type KeyResult struct {
 	Creator          int         `json:"creator"`
 	DateCreated      string      `json:"date_created"`
 	GoalPrettyID     string      `json:"goal_pretty_id"`
-	PercentCompleted int         `json:"percent_completed,omitempty"`
+	PercentCompleted float64     `json:"percent_completed,omitempty"`
 	Completed        bool        `json:"completed"`
 	TaskIds          []string    `json:"task_ids"`
 	SubcategoryIds   []string    `json:"subcategory_ids"`

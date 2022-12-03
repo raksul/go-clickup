@@ -2,6 +2,7 @@ package clickup
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 	"strings"
 )
@@ -45,7 +46,7 @@ type Task struct {
 	TextContent     string                 `json:"text_content"`
 	Description     string                 `json:"description"`
 	Status          TaskStatus             `json:"status"`
-	Orderindex      string                 `json:"orderindex"`
+	Orderindex      json.Number            `json:"orderindex"`
 	DateCreated     string                 `json:"date_created"`
 	DateUpdated     string                 `json:"date_updated"`
 	DateClosed      string                 `json:"date_closed"`
@@ -95,10 +96,10 @@ type TasksInStatus struct {
 }
 
 type TaskStatus struct {
-	Status     string `json:"status"`
-	Color      string `json:"color"`
-	Type       string `json:"type"`
-	Orderindex int    `json:"orderindex"`
+	Status     string      `json:"status"`
+	Color      string      `json:"color"`
+	Type       string      `json:"type"`
+	Orderindex json.Number `json:"orderindex"`
 }
 
 type TaskPriority struct {
@@ -146,7 +147,7 @@ type TaskStatusHistory struct {
 	Color      string                     `json:"color"`
 	Type       string                     `json:"type"`
 	TotalTime  CurrentTaskStatusTotalTime `json:"total_time"`
-	Orderindex int                        `json:"orderindex"`
+	Orderindex json.Number                `json:"orderindex"`
 }
 
 // TODO: Implement custom field

@@ -2,6 +2,7 @@ package clickup
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 )
 
@@ -24,19 +25,19 @@ type ChecklistItemRequest struct {
 }
 
 type Checklist struct {
-	ID         string `json:"id"`
-	TaskID     string `json:"task_id"`
-	Name       string `json:"name"`
-	Orderindex int    `json:"orderindex"`
-	Resolved   int    `json:"resolved"`
-	Unresolved int    `json:"unresolved"`
-	Items      []Item `json:"items,omitempty"`
+	ID         string      `json:"id"`
+	TaskID     string      `json:"task_id"`
+	Name       string      `json:"name"`
+	Orderindex json.Number `json:"orderindex"`
+	Resolved   int         `json:"resolved"`
+	Unresolved int         `json:"unresolved"`
+	Items      []Item      `json:"items,omitempty"`
 }
 
 type Item struct {
 	ID          string        `json:"id"`
 	Name        string        `json:"name"`
-	Orderindex  int           `json:"orderindex"`
+	Orderindex  json.Number   `json:"orderindex"`
 	Assignee    User          `json:"assignee"`
 	Resolved    bool          `json:"resolved"`
 	Parent      interface{}   `json:"parent"`

@@ -87,7 +87,7 @@ func TestTasksService_GetTask(t *testing.T) {
 		Status: TaskStatus{
 			Status:     "in progress",
 			Color:      "#d3d3d3",
-			Orderindex: 1,
+			Orderindex: "1",
 			Type:       "custom",
 		},
 		Orderindex:  "1.00000000000000000000000000000000",

@@ -2,6 +2,7 @@ package clickup
 
 import (
 	"context"
+	"encoding/json"
 	"fmt"
 )
 
@@ -75,11 +76,11 @@ type Space struct {
 	Name     string `json:"name"`
 	Private  bool   `json:"private"`
 	Statuses []struct {
-		ID         string `json:"id"`
-		Status     string `json:"status"`
-		Type       string `json:"type"`
-		Orderindex int    `json:"orderindex"`
-		Color      string `json:"color"`
+		ID         string      `json:"id"`
+		Status     string      `json:"status"`
+		Type       string      `json:"type"`
+		Orderindex json.Number `json:"orderindex"`
+		Color      string      `json:"color"`
 	} `json:"statuses"`
 	MultipleAssignees bool `json:"multiple_assignees"`
 	Features          struct {

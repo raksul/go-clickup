@@ -23,7 +23,7 @@ type FolderRequest struct {
 type Folder struct {
 	ID               string                  `json:"id"`
 	Name             string                  `json:"name"`
-	Orderindex       int                     `json:"orderindex"`
+	Orderindex       json.Number             `json:"orderindex"`
 	OverrideStatuses bool                    `json:"override_statuses"`
 	Hidden           bool                    `json:"hidden"`
 	Space            SpaceOfFolderBelonging  `json:"space"`
@@ -43,7 +43,7 @@ type SpaceOfFolderBelonging struct {
 type ListOfFolderBelonging struct {
 	ID         string      `json:"id"`
 	Name       string      `json:"name"`
-	Orderindex int         `json:"orderindex"`
+	Orderindex json.Number `json:"orderindex"`
 	Status     interface{} `json:"status"`
 	Priority   interface{} `json:"priority"`
 	Assignee   interface{} `json:"assignee"`
@@ -58,11 +58,11 @@ type ListOfFolderBelonging struct {
 	Archived         bool        `json:"archived"`
 	OverrideStatuses interface{} `json:"override_statuses"`
 	Statuses         []struct {
-		ID         string `json:"id"`
-		Status     string `json:"status"`
-		Orderindex int    `json:"orderindex"`
-		Color      string `json:"color"`
-		Type       string `json:"type"`
+		ID         string      `json:"id"`
+		Status     string      `json:"status"`
+		Orderindex json.Number `json:"orderindex"`
+		Color      string      `json:"color"`
+		Type       string      `json:"type"`
 	} `json:"statuses"`
 	PermissionLevel string `json:"permission_level,omitempty"`
 }
