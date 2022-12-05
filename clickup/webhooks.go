@@ -70,7 +70,7 @@ type Webhook struct {
 	TaskID   string        `json:"task_id,omitempty"`
 	ListID   int           `json:"list_id,omitempty"`
 	FolderID string        `json:"folder_id,string"`
-	SpaceID  string        `json:"space_id,omitempty"`
+	SpaceID  int           `json:"space_id,omitempty"`
 	Health   webhookHealth `json:"health"`
 	Secret   string        `json:"secret"`
 }
