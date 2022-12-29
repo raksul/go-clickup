@@ -18,6 +18,7 @@ type GetBulkTasksTimeInStatusResponse map[string]TasksInStatus
 type TaskRequest struct {
 	Name                      string                     `json:"name,omitempty"`
 	Description               string                     `json:"description,omitempty"`
+	Archived                  bool                       `json:"archived"`
 	Assignees                 []int                      `json:"assignees,omitempty"`
 	Tags                      []string                   `json:"tags,omitempty"`
 	Status                    string                     `json:"status,omitempty"`
@@ -215,6 +216,26 @@ func (s *TasksService) UpdateTask(ctx context.Context, taskID string, opts *GetT
 	}
 
 	return task, resp, nil
+}
+
+func (s *TasksService) ArchiveTask(ctx context.Context, taskID string, archive bool) (*Response, error) {
+	u := fmt.Sprintf("tasks/v1/archiveTasks/")
+
+	req, err := s.client.NewRequest("PUT", u, map[string]interface{}{
+		"task_ids": []string{taskID},
+		"archive":  archive,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	var out interface{}
+	resp, err := s.client.Do(ctx, req, &out)
+	if err != nil {
+		return resp, err
+	}
+
+	return resp, nil
 }
 
 func (s *TasksService) DeleteTask(ctx context.Context, taskID string, opts *GetTaskOptions) (*Response, error) {
