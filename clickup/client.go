@@ -62,6 +62,7 @@ type Client struct {
 	Tags            *TagsService
 	Views           *ViewsService
 	Webhooks        *WebhooksService
+	UserGroups      *UserGroupsService
 }
 
 type service struct {
@@ -143,6 +144,7 @@ func NewClient(httpClient *http.Client, APIKey string) *Client {
 	c.Tags = (*TagsService)(&c.common)
 	c.Views = (*ViewsService)(&c.common)
 	c.Webhooks = (*WebhooksService)(&c.common)
+	c.UserGroups = (*UserGroupsService)(&c.common)
 	return c
 }
 
