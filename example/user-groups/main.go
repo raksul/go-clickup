@@ -16,7 +16,8 @@ func fetchUserGroups() ([]clickup.UserGroup, error) {
 	client := clickup.NewClient(nil, api_key)
 
 	opts := &clickup.GetUserGroupsOptions{
-		TeamID: "123",
+		TeamID:   "123",
+		GroupIDs: []string{"321", "456"}, // optional parameter
 	}
 	groups, _, err := client.UserGroups.GetUserGroups(context.Background(), opts)
 

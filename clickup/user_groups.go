@@ -32,13 +32,12 @@ type GroupMember struct {
 }
 
 type GetUserGroupsOptions struct {
-	TeamID  string `url:"team_id,omitempty"`
-	GroupID string `url:"group_id,omitempty"`
+	TeamID   string   `url:"team_id,omitempty"`
+	GroupIDs []string `url:"group_ids,omitempty"`
 }
 
 func (s *UserGroupsService) GetUserGroups(ctx context.Context, opts *GetUserGroupsOptions) ([]UserGroup, *Response, error) {
-	u := "group"
-	u, err := addOptions(u, opts)
+	u, err := addOptions("group", opts)
 	if err != nil {
 		return nil, nil, err
 	}
