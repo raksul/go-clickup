@@ -15,7 +15,7 @@ func fetchSpaces(teamId string) ([]clickup.Space, error) {
 	api_key := os.Getenv("CLICKUP_API_KEY")
 	client := clickup.NewClient(nil, api_key)
 
-	spaces, _, err := client.Spaces.GetSpaces(context.Background(), teamId)
+	spaces, _, err := client.Spaces.GetSpaces(context.Background(), teamId, false)
 	return spaces, err
 }
 

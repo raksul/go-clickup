@@ -168,8 +168,8 @@ func (s *SpacesService) DeleteSpace(ctx context.Context, spaceID int) (*Response
 	return resp, nil
 }
 
-func (s *SpacesService) GetSpaces(ctx context.Context, teamID string) ([]Space, *Response, error) {
-	u := fmt.Sprintf("team/%s/space", teamID)
+func (s *SpacesService) GetSpaces(ctx context.Context, teamID string, archived bool) ([]Space, *Response, error) {
+	u := fmt.Sprintf("team/%s/space?archived=%v", teamID, archived)
 	req, err := s.client.NewRequest("GET", u, nil)
 	if err != nil {
 		return nil, nil, err
