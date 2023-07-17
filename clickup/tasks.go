@@ -72,39 +72,34 @@ type Task struct {
 	Project         ProjectOfTaskBelonging `json:"project"`
 	Folder          FolderOftaskBelonging  `json:"folder"`
 	Space           SpaceOfTaskBelonging   `json:"space"`
-	Attachments     []Attachment           `json:"attachments"`
+	Attachments     []TaskAttachment       `json:"attachments"`
 }
 
-type Attachment struct {
+type TaskAttachment struct {
 	ID               string `json:"id"`
-    	Date             string `json:"date"`
-    	Title            string `json:"title"`
-    	Type             int `json:"type"`
-    	Source           int `json:"source"`
-    	Version          int `json:"version"`
-    	Extension        string `json:"extension"`
-    	ThumbnailSmall   string `json:"thumbnail_small"`
-    	ThumbnailMedium  string `json:"thumbnail_medium"`
-    	ThumbnailLarge   string `json:"thumbnail_large"`
-    	IsFolder         bool `json:"is_folder"`
-    	Mimetype         string `json:"mimetype"`
-    	Hidden           bool `json:"hidden"`
-    	ParentId         string `json:"parent_id"`
-    	Size      	 int `json:"size"`
-    	TotalComments    int `json:"total_comments"`
-    	ResolvedComments int `json:"resolved_comments"`
-    	User             User `json:"user"`
-    	Deleted          bool `json:"deleted"`
-    	Orientation      string `json:"orientation"`
-    	Url              string `json:"url"`
-    	EmailData        string `json:"email_data"`
-    	UrlWQuery        string `json:"url_w_query"`
-    	UrlWHost         string `json:"url_w_host"`
-	TaskID           string `json:"task_id"`
-	DependsOn        string `json:"depends_on"`
+	Date             string `json:"date"`
+	Title            string `json:"title"`
 	Type             int    `json:"type"`
-	DateCreated      string `json:"date_created"`
-	Userid           string `json:"userid"`
+	Source           int    `json:"source"`
+	Version          int    `json:"version"`
+	Extension        string `json:"extension"`
+	ThumbnailSmall   string `json:"thumbnail_small"`
+	ThumbnailMedium  string `json:"thumbnail_medium"`
+	ThumbnailLarge   string `json:"thumbnail_large"`
+	IsFolder         bool   `json:"is_folder"`
+	Mimetype         string `json:"mimetype"`
+	Hidden           bool   `json:"hidden"`
+	ParentId         string `json:"parent_id"`
+	Size             int    `json:"size"`
+	TotalComments    int    `json:"total_comments"`
+	ResolvedComments int    `json:"resolved_comments"`
+	User             User   `json:"user"`
+	Deleted          bool   `json:"deleted"`
+	Orientation      string `json:"orientation"`
+	Url              string `json:"url"`
+	EmailData        string `json:"email_data"`
+	UrlWQuery        string `json:"url_w_query"`
+	UrlWHost         string `json:"url_w_host"`
 }
 
 type Dependence struct {
