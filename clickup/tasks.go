@@ -35,7 +35,7 @@ type TaskRequest struct {
 }
 
 type CustomFieldInTaskRequest struct {
-	ID    string 	  `json:"id"`
+	ID    string      `json:"id"`
 	Value interface{} `json:"value"`
 }
 
