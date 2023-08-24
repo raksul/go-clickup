@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"net/url"
 	"strings"
 )
 
@@ -178,22 +179,75 @@ type TaskStatusHistory struct {
 	Orderindex json.Number                `json:"orderindex"`
 }
 
-// TODO: Implement custom field
 type GetTasksOptions struct {
-	Archived      bool     `url:"archived,omitempty"`
-	Page          int      `url:"page,omitempty"`
-	OrderBy       string   `url:"order_by,omitempty"`
-	Reverse       bool     `url:"reverse,omitempty"`
-	Subtasks      bool     `url:"subtasks,omitempty"`
-	Statuses      []string `url:"statuses[],omitempty"`
-	IncludeClosed bool     `url:"include_closed,omitempty"`
-	Assignees     []string `url:"assignees[],omitempty"`
-	DueDateGt     *Date    `url:"due_date_gt,omitempty"`
-	DueDateLt     *Date    `url:"due_date_lt,omitempty"`
-	DateCreatedGt *Date    `url:"date_created_gt,omitempty"`
-	DateCreatedLt *Date    `url:"date_created_lt,omitempty"`
-	DateUpdatedGt *Date    `url:"date_updated_gt,omitempty"`
-	DateUpdatedLt *Date    `url:"date_updated_lt,omitempty"`
+	Archived      bool                          `url:"archived,omitempty"`
+	Page          int                           `url:"page,omitempty"`
+	OrderBy       string                        `url:"order_by,omitempty"`
+	Reverse       bool                          `url:"reverse,omitempty"`
+	Subtasks      bool                          `url:"subtasks,omitempty"`
+	Statuses      []string                      `url:"statuses[],omitempty"`
+	IncludeClosed bool                          `url:"include_closed,omitempty"`
+	Assignees     []string                      `url:"assignees[],omitempty"`
+	Tags          []string                      `url:"tags[],omitempty"`
+	DueDateGt     *Date                         `url:"due_date_gt,omitempty"`
+	DueDateLt     *Date                         `url:"due_date_lt,omitempty"`
+	DateCreatedGt *Date                         `url:"date_created_gt,omitempty"`
+	DateCreatedLt *Date                         `url:"date_created_lt,omitempty"`
+	DateUpdatedGt *Date                         `url:"date_updated_gt,omitempty"`
+	DateUpdatedLt *Date                         `url:"date_updated_lt,omitempty"`
+	CustomFields  CustomFieldsInGetTasksRequest `url:"custom_fields,omitempty"`
+}
+
+// CustomFieldsInGetTasksRequest is used to filter tasks using Custom Fields for GetTasks
+type CustomFieldsInGetTasksRequest []CustomFieldInGetTasksRequest
+
+type CustomFieldInGetTasksRequest struct {
+	FieldId  string                               `url:"field_id"`
+	Operator CustomFieldInGetTasksRequestOperator `url:"operator"`
+	Value    []string                             `url:"value,omitempty,comma"`
+}
+
+// CustomFieldInGetTasksRequestOperator Values are found here https://clickup.com/api/developer-portal/filtertasks/
+type CustomFieldInGetTasksRequestOperator int
+
+const (
+	Equals               CustomFieldInGetTasksRequestOperator = iota //=
+	LessThan                                                         // <
+	LessThanOrEqualTo                                                // <=
+	GreaterThan                                                      // > (greater than)
+	GreaterThanOrEqualTo                                             // > = (greater than or equal to)
+	NotEqualTo                                                       // != (not equal to)
+	IsNull                                                           // IS NULL (is not set)
+	ISNotNull                                                        // IS NOT NULL (is set)
+	Range                                                            // (is between)
+	Any                                                              // (contains any matching criteria)
+	All                                                              // (contains all matching criteria)
+	NotAny                                                           // (does not contain any mathching criteria)
+	NotAll                                                           // (does not contain all of the matching criteria)
+)
+
+func (c CustomFieldInGetTasksRequestOperator) String() string {
+	return [...]string{"=", "<", "<=", ">", ">=", "!=", "IS NULL", "IS NOT NULL", "RANGE", "ANY", "ALL", "NOT ANY", "NOT ALL"}[c]
+}
+
+func (cfs CustomFieldsInGetTasksRequest) EncodeValues(key string, v *url.Values) error {
+	sb := strings.Builder{}
+	sb.WriteString("[")
+	sep := ""
+	for _, c := range cfs {
+		sb.WriteString(sep + "{\"field_id\":\"" + c.FieldId + "\",\"operator\":\"" + c.Operator.String() + "\"")
+		if len(c.Value) == 1 {
+			sb.WriteString(",\"value\":\"" + c.Value[0] + "\"")
+		} else if len(c.Value) > 1 {
+			sb.WriteString(",\"value\":[\"" + strings.Join(c.Value, "\",\"") + "\"]")
+		}
+		sb.WriteString("}")
+		sep = ","
+	}
+
+	sb.WriteString("]")
+	v.Set(key, sb.String())
+	return nil
 }
 
 type GetTaskOptions struct {
