@@ -218,7 +218,7 @@ const (
 	GreaterThanOrEqualTo                                             // > = (greater than or equal to)
 	NotEqualTo                                                       // != (not equal to)
 	IsNull                                                           // IS NULL (is not set)
-	ISNotNull                                                        // IS NOT NULL (is set)
+	IsNotNull                                                        // IS NOT NULL (is set)
 	Range                                                            // (is between)
 	Any                                                              // (contains any matching criteria)
 	All                                                              // (contains all matching criteria)
