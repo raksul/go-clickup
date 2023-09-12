@@ -161,7 +161,7 @@ func TestUrlEncodeCustomFieldsInGetTasksRequest(t *testing.T) {
 			},
 			{
 				FieldId:  "4223cfb4-b14b-4bd4-aa35-81ae29c62f4d",
-				Operator: ISNotNull,
+				Operator: IsNotNull,
 			},
 			{
 				FieldId:  "4d4044e9-4819-4819-af2a-34fde3a41903",
