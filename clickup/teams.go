@@ -47,34 +47,34 @@ type InvitedBy struct {
 	ProfilePicture string `json:"profilePicture"`
 }
 
-type SeatsResponse struct{
-    Seats
+type SeatsResponse struct {
+	Seats
 }
 
 type Seats struct {
-    Members Members `json:"members"`
-    Guests Guests `json:"guests"`
+	Members Members `json:"members"`
+	Guests  Guests  `json:"guests"`
 }
 
 type Members struct {
-    FilledMembersSeats int `json:"filled_members_seats"`
-    TotalMemberSeats int `json:"total_member_seats"`
-    EmptyMemberSeats int `json:"empty_member_seats"`
+	FilledMembersSeats int `json:"filled_members_seats"`
+	TotalMemberSeats   int `json:"total_member_seats"`
+	EmptyMemberSeats   int `json:"empty_member_seats"`
 }
 
 type Guests struct {
-    FilledGuestSeats int `json:"filled_guest_seats"`
-    TotalGuestSeats int `json:"total_guest_seats"`
-    EmptyGuestSeats int `json:"empty_guest_seats"`
-} 
+	FilledGuestSeats int `json:"filled_guest_seats"`
+	TotalGuestSeats  int `json:"total_guest_seats"`
+	EmptyGuestSeats  int `json:"empty_guest_seats"`
+}
 
 type PlanResponse struct {
-    Plan
+	Plan
 }
 
 type Plan struct {
-    Id int `json:"plan_id"`
-    Name string `json:"plan_name"`
+	Id   int    `json:"plan_id"`
+	Name string `json:"plan_name"`
 }
 
 // Teams is the legacy term for what are now called Workspaces in ClickUp.
@@ -99,7 +99,7 @@ func (s *TeamsService) GetTeams(ctx context.Context) ([]Team, *Response, error) 
 // For compatablitly, the term team is still used in this API.
 // This is NOT the new "Teams" feature which represents a group of users.
 func (s *TeamsService) GetSeats(ctx context.Context, teamId string) (Seats, *Response, error) {
-    u := fmt.Sprintf("team/%s/seats", teamId)
+	u := fmt.Sprintf("team/%s/seats", teamId)
 	req, err := s.client.NewRequest("GET", u, nil)
 	if err != nil {
 		return Seats{}, nil, err
@@ -118,7 +118,7 @@ func (s *TeamsService) GetSeats(ctx context.Context, teamId string) (Seats, *Res
 // For compatablitly, the term team is still used in this API.
 // This is NOT the new "Teams" feature which represents a group of users.
 func (s *TeamsService) GetPlan(ctx context.Context, teamId string) (Plan, *Response, error) {
-    u := fmt.Sprintf("team/%s/plan", teamId)
+	u := fmt.Sprintf("team/%s/plan", teamId)
 	req, err := s.client.NewRequest("GET", u, nil)
 	if err != nil {
 		return Plan{}, nil, err

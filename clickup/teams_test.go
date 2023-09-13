@@ -75,8 +75,8 @@ func TestTeamsService_GetSeats(t *testing.T) {
 	mux.HandleFunc("/team/123/seats", func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "GET")
 		fmt.Fprint(
-            w,
-            `{
+			w,
+			`{
                 "members": {
                   "filled_members_seats": 9,
                   "total_member_seats": 9,
@@ -98,18 +98,18 @@ func TestTeamsService_GetSeats(t *testing.T) {
 	}
 
 	var want Seats
-    members := Members{
-        FilledMembersSeats: 9,
-        TotalMemberSeats: 9,
-        EmptyMemberSeats: 0,
-    }
-    guests := Guests{
-        FilledGuestSeats: 2,
-        TotalGuestSeats: 50,
-        EmptyGuestSeats: 48,
-    }
-    want.Members = members
-    want.Guests = guests
+	members := Members{
+		FilledMembersSeats: 9,
+		TotalMemberSeats:   9,
+		EmptyMemberSeats:   0,
+	}
+	guests := Guests{
+		FilledGuestSeats: 2,
+		TotalGuestSeats:  50,
+		EmptyGuestSeats:  48,
+	}
+	want.Members = members
+	want.Guests = guests
 	if !cmp.Equal(artifacts, want) {
 		t.Errorf("Actions.ListArtifacts returned %+v, want %+v", artifacts, want)
 	}
@@ -122,8 +122,8 @@ func TestTeamsService_GetPlan(t *testing.T) {
 	mux.HandleFunc("/team/123/plan", func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "GET")
 		fmt.Fprint(
-            w,
-            `{
+			w,
+			`{
                 "plan_name": "Free Forever",
                 "plan_id": 1
             }`,
@@ -136,10 +136,10 @@ func TestTeamsService_GetPlan(t *testing.T) {
 		t.Errorf("Actions.ListArtifacts returned error: %v", err)
 	}
 
-    want := Plan{
-        Id: 1,
-        Name: "Free Forever",
-    }
+	want := Plan{
+		Id:   1,
+		Name: "Free Forever",
+	}
 	if !cmp.Equal(artifacts, want) {
 		t.Errorf("Actions.ListArtifacts returned %+v, want %+v", artifacts, want)
 	}

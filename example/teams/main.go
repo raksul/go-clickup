@@ -27,7 +27,7 @@ func fetchSeats(teamId string) (clickup.Seats, error) {
 	return seats, err
 }
 
-func fetchPlan(teamId string) (clickup.Plan, error){
+func fetchPlan(teamId string) (clickup.Plan, error) {
 	api_key := os.Getenv("CLICKUP_API_KEY")
 	client := clickup.NewClient(nil, api_key)
 
@@ -44,24 +44,24 @@ func main() {
 	if err != nil {
 		fmt.Printf("Error: %v\n", err)
 	} else {
-        for _, team := range teams {
-            fmt.Println(team.Name)
-        }
-    }
+		for _, team := range teams {
+			fmt.Println(team.Name)
+		}
+	}
 
-    seats, err := fetchSeats(teamId)
+	seats, err := fetchSeats(teamId)
 
-    if err != nil {
-        fmt.Printf("Error: %v\n", err)
-    } else {
-        fmt.Printf("Seats: %+v\n", seats)
-    }
-    
-    plan, err := fetchPlan(teamId)
+	if err != nil {
+		fmt.Printf("Error: %v\n", err)
+	} else {
+		fmt.Printf("Seats: %+v\n", seats)
+	}
 
-    if err != nil {
-        fmt.Printf("Error: %v\n", err)
-    } else {
-        fmt.Printf("Plan: %+v\n", plan)
-    }
+	plan, err := fetchPlan(teamId)
+
+	if err != nil {
+		fmt.Printf("Error: %v\n", err)
+	} else {
+		fmt.Printf("Plan: %+v\n", plan)
+	}
 }
