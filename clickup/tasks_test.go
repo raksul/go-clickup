@@ -122,3 +122,68 @@ func TestTasksService_GetTask(t *testing.T) {
 		t.Errorf("Actions.ListArtifacts returned %+v, want %+v", artifacts, want)
 	}
 }
+
+func TestUrlEncodeCustomFieldsInGetTasksRequest(t *testing.T) {
+
+	var gtOpts = GetTasksOptions{
+		Archived: false,
+		Page:     3,
+		Reverse:  false,
+		CustomFields: CustomFieldsInGetTasksRequest{
+			{
+				FieldId:  "de761538-8ae0-42e8-91d9-f1a0cdfbd8b5",
+				Operator: GreaterThan,
+				Value:    []string{"2"},
+			},
+		},
+	}
+	options, err := addOptions("https://www.example.org/", gtOpts)
+	if err != nil {
+		t.Errorf("expected no error but got error: %v", err)
+	}
+
+	want := "https://www.example.org/?custom_fields=%5B%7B%22field_id%22%3A%22de761538-8ae0-42e8-91d9-f1a0cdfbd8b5%22%2C%22operator%22%3A%22%3E%22%2C%22value%22%3A%222%22%7D%5D&page=3"
+
+	if !cmp.Equal(options, want) {
+
+		t.Errorf("addOptions returned %+v, want %+v", options, want)
+	}
+
+	gtOpts = GetTasksOptions{
+		Archived: false,
+		Page:     3,
+		Reverse:  false,
+		CustomFields: CustomFieldsInGetTasksRequest{
+			{
+				FieldId:  "de761538-8ae0-42e8-91d9-f1a0cdfbd8b5",
+				Operator: GreaterThan,
+				Value:    []string{"2"},
+			},
+			{
+				FieldId:  "4223cfb4-b14b-4bd4-aa35-81ae29c62f4d",
+				Operator: IsNotNull,
+			},
+			{
+				FieldId:  "4d4044e9-4819-4819-af2a-34fde3a41903",
+				Operator: Range,
+				Value:    []string{"5", "10"},
+			},
+			{
+				FieldId:  "1bea591e-22a6-4485-8614-88eb3d21c188",
+				Operator: Any,
+				Value:    []string{"5", "10", "15", "20"},
+			},
+		},
+	}
+	options, err = addOptions("https://www.example.org/", gtOpts)
+	if err != nil {
+		t.Errorf("expected no error but got error: %v", err)
+	}
+
+	want = "https://www.example.org/?custom_fields=%5B%7B%22field_id%22%3A%22de761538-8ae0-42e8-91d9-f1a0cdfbd8b5%22%2C%22operator%22%3A%22%3E%22%2C%22value%22%3A%222%22%7D%2C%7B%22field_id%22%3A%224223cfb4-b14b-4bd4-aa35-81ae29c62f4d%22%2C%22operator%22%3A%22IS+NOT+NULL%22%7D%2C%7B%22field_id%22%3A%224d4044e9-4819-4819-af2a-34fde3a41903%22%2C%22operator%22%3A%22RANGE%22%2C%22value%22%3A%5B%225%22%2C%2210%22%5D%7D%2C%7B%22field_id%22%3A%221bea591e-22a6-4485-8614-88eb3d21c188%22%2C%22operator%22%3A%22ANY%22%2C%22value%22%3A%5B%225%22%2C%2210%22%2C%2215%22%2C%2220%22%5D%7D%5D&page=3"
+
+	if !cmp.Equal(options, want) { //"https://www.example.org/?custom_fields=[{\"field_id\":\"de761538-8ae0-42e8-91d9-f1a0cdfbd8b5\",\"operator\":\">\",\"value\":"2"}]&page=3",
+
+		t.Errorf("addOptions returned %+v, want %+v", options, want)
+	}
+}
