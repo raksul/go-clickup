@@ -188,6 +188,8 @@ If you are new to pull requests, checkout Collaborating on projects using issues
   - [x] Create Task From Template
 - [x] Teams
   - [x] Get Teams
+  - [x] Get Workspace Seats
+  - [x] Get Workspace Plan
 - [ ] Time Tracking 2.0
   - [ ] Get time entries within a date range
   - [ ] Get singular time entry

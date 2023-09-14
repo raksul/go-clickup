@@ -2,6 +2,7 @@ package clickup
 
 import (
 	"context"
+	"fmt"
 )
 
 type TeamsService service
@@ -46,6 +47,36 @@ type InvitedBy struct {
 	ProfilePicture string `json:"profilePicture"`
 }
 
+type SeatsResponse struct {
+	Seats
+}
+
+type Seats struct {
+	Members Members `json:"members"`
+	Guests  Guests  `json:"guests"`
+}
+
+type Members struct {
+	FilledMembersSeats int `json:"filled_members_seats"`
+	TotalMemberSeats   int `json:"total_member_seats"`
+	EmptyMemberSeats   int `json:"empty_member_seats"`
+}
+
+type Guests struct {
+	FilledGuestSeats int `json:"filled_guest_seats"`
+	TotalGuestSeats  int `json:"total_guest_seats"`
+	EmptyGuestSeats  int `json:"empty_guest_seats"`
+}
+
+type PlanResponse struct {
+	Plan
+}
+
+type Plan struct {
+	Id   int    `json:"plan_id"`
+	Name string `json:"plan_name"`
+}
+
 // Teams is the legacy term for what are now called Workspaces in ClickUp.
 // For compatablitly, the term team is still used in this API.
 // This is NOT the new "Teams" feature which represents a group of users.
@@ -62,4 +93,42 @@ func (s *TeamsService) GetTeams(ctx context.Context) ([]Team, *Response, error) 
 	}
 
 	return gtr.Teams, resp, nil
+}
+
+// Teams is the legacy term for what are now called Workspaces in ClickUp.
+// For compatablitly, the term team is still used in this API.
+// This is NOT the new "Teams" feature which represents a group of users.
+func (s *TeamsService) GetSeats(ctx context.Context, teamId string) (Seats, *Response, error) {
+	u := fmt.Sprintf("team/%s/seats", teamId)
+	req, err := s.client.NewRequest("GET", u, nil)
+	if err != nil {
+		return Seats{}, nil, err
+	}
+
+	sr := new(SeatsResponse)
+	resp, err := s.client.Do(ctx, req, sr)
+	if err != nil {
+		return Seats{}, resp, err
+	}
+
+	return sr.Seats, resp, nil
+}
+
+// Teams is the legacy term for what are now called Workspaces in ClickUp.
+// For compatablitly, the term team is still used in this API.
+// This is NOT the new "Teams" feature which represents a group of users.
+func (s *TeamsService) GetPlan(ctx context.Context, teamId string) (Plan, *Response, error) {
+	u := fmt.Sprintf("team/%s/plan", teamId)
+	req, err := s.client.NewRequest("GET", u, nil)
+	if err != nil {
+		return Plan{}, nil, err
+	}
+
+	pr := new(PlanResponse)
+	resp, err := s.client.Do(ctx, req, pr)
+	if err != nil {
+		return Plan{}, resp, err
+	}
+
+	return pr.Plan, resp, nil
 }
