@@ -20,7 +20,7 @@ type UpdateCommentRequest struct {
 }
 
 type CreateCommentResponse struct {
-	ID     string `json:"id"`
+	ID     any    `json:"id"`
 	HistId string `json:"hist_id"`
 	Date   *Date  `json:"date"`
 }
