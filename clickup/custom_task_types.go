@@ -18,6 +18,15 @@ type CustomItem struct {
 	Name        string `json:"name"`        // Custom task type name.
 	NamePlural  string `json:"name_plural"` // Custom task type plural name.
 	Description string `json:"description"` // Custom task type description.
+
+	// Not documented in API explorer
+	Avatar CustomItemAvatar `json:"avatar"` // Custom task icon data.
+}
+
+// Not documented in API explorer. Comments are observations.
+type CustomItemAvatar struct {
+	Source string `json:"source"` // null (ClickUp Milestone Glyph), fas (Font Awesome Solid), fab (Font Awesome Brands).
+	Value  string `json:"value"`  // null is for ClickUp Glyphs, e.g., Task and Milestone.
 }
 
 // See https://clickup.com/api/clickupreference/operation/GetCustomItems/

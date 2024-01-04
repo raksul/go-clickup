@@ -15,7 +15,7 @@ func TestCustomTaskTypesService_GetCustomTaskTypes(t *testing.T) {
 
 	mux.HandleFunc(("/team/1234/custom_item"), func(w http.ResponseWriter, r *http.Request) {
 		testMethod(t, r, "GET")
-		fmt.Fprint(w, `{"custom_items": [{"id": 1300, "name": "Bug", "name_plural": "Bugs", "description": "Custom item type for bugs."}]}`)
+		fmt.Fprint(w, `{"custom_items": [{"id": 1300, "name": "Bug", "name_plural": "Bugs", "description": "Custom item type for bugs.", "avatar": { "source": "fas", "value": "bug" }}]}`)
 	})
 
 	ctx := context.Background()
@@ -25,7 +25,7 @@ func TestCustomTaskTypesService_GetCustomTaskTypes(t *testing.T) {
 	}
 
 	want := []CustomItem{
-		{Id: 1300, Name: "Bug", NamePlural: "Bugs", Description: "Custom item type for bugs."},
+		{Id: 1300, Name: "Bug", NamePlural: "Bugs", Description: "Custom item type for bugs.", Avatar: CustomItemAvatar{Source: "fas", Value: "bug"}},
 	}
 	if !cmp.Equal(customTaskTypes, want) {
 		t.Errorf("CustomTaskTypes.GetCustomTaskTypes returned %+v, want %+v", customTaskTypes, want)
