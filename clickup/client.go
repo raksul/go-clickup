@@ -49,6 +49,7 @@ type Client struct {
 	Checklists      *ChecklistsService
 	Comments        *CommentsService
 	CustomFields    *CustomFieldsService
+	CustomTaskTypes *CustomTaskTypesService
 	Dependencies    *DependenciesService
 	Goals           *GoalsService
 	Tasks           *TasksService
@@ -131,6 +132,7 @@ func NewClient(httpClient *http.Client, APIKey string) *Client {
 	c.Checklists = (*ChecklistsService)(&c.common)
 	c.Comments = (*CommentsService)(&c.common)
 	c.CustomFields = (*CustomFieldsService)(&c.common)
+	c.CustomTaskTypes = (*CustomTaskTypesService)(&c.common)
 	c.Dependencies = (*DependenciesService)(&c.common)
 	c.Goals = (*GoalsService)(&c.common)
 	c.Tasks = (*TasksService)(&c.common)
