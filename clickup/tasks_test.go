@@ -19,7 +19,7 @@ func TestTasksService_GetTask(t *testing.T) {
 			`{
 				"id": "9hx",
     		    "custom_id":null,
-						"custom_item_id": null,
+    		    "custom_item_id": null,
     		    "name": "Task Name",
     		    "text_content": "New Task Description",
     		    "description": "New Task Description",
@@ -81,11 +81,11 @@ func TestTasksService_GetTask(t *testing.T) {
 	}
 
 	want := &Task{
-		ID:          "9hx",
+		ID:           "9hx",
 		CustomItemId: 0,
-		Name:        "Task Name",
-		TextContent: "New Task Description",
-		Description: "New Task Description",
+		Name:         "Task Name",
+		TextContent:  "New Task Description",
+		Description:  "New Task Description",
 		Status: TaskStatus{
 			Status:     "in progress",
 			Color:      "#d3d3d3",
