@@ -63,6 +63,7 @@ type Task struct {
 	StartDate       string                 `json:"start_date,omitempty"`
 	Points          Point                  `json:"points,omitempty"`
 	TimeEstimate    int64                  `json:"time_estimate"`
+	TimeSpent       int64                  `json:"time_spent"`
 	CustomFields    []CustomField          `json:"custom_fields"`
 	Dependencies    []Dependence           `json:"dependencies"`
 	LinkedTasks     []LinkedTask           `json:"linked_tasks"`
@@ -251,9 +252,9 @@ func (cfs CustomFieldsInGetTasksRequest) EncodeValues(key string, v *url.Values)
 }
 
 type GetTaskOptions struct {
-	CustomTaskIDs   string `url:"custom_task_ids,omitempty"`
-	TeamID          int    `url:"team_id,omitempty"`
-	IncludeSubTasks bool   `url:"include_subtasks,omitempty"`
+	CustomTaskIDs   bool `url:"custom_task_ids,omitempty"`
+	TeamID          int  `url:"team_id,omitempty"`
+	IncludeSubTasks bool `url:"include_subtasks,omitempty"`
 }
 
 type GetBulkTasksTimeInStatusOptions struct {
