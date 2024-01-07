@@ -227,6 +227,8 @@ If you are new to pull requests, checkout Collaborating on projects using issues
   - [x] Update Webhook
   - [x] Delete Webhook
   - [x] Get Webhooks
+- [x] Custom Task Types
+  - [x] Get Custom Task Types
 
 ## License
 This project is released under the terms of the [MIT license](http://en.wikipedia.org/wiki/MIT_License).

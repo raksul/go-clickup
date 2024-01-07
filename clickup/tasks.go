@@ -16,6 +16,7 @@ type GetTasksResponse struct {
 
 type GetBulkTasksTimeInStatusResponse map[string]TasksInStatus
 
+// See https://clickup.com/api/clickupreference/operation/CreateTask/
 type TaskRequest struct {
 	Name                      string                     `json:"name,omitempty"`
 	Description               string                     `json:"description,omitempty"`
@@ -33,6 +34,7 @@ type TaskRequest struct {
 	LinksTo                   string                     `json:"links_to,omitempty"`
 	CheckRequiredCustomFields bool                       `json:"check_required_custom_fields,omitempty"`
 	CustomFields              []CustomFieldInTaskRequest `json:"custom_fields,omitempty"`
+	CustomItemId              int                        `json:"custom_item_id,omitempty"` // To create a task that doesn't use a custom task type, either don't include this field in the request body, or send 'null'. To create this task as a Milestone, send a value of 1. To use a custom task type, send the custom task type ID as defined in your Workspace, such as 2.
 }
 
 type CustomFieldInTaskRequest struct {
@@ -43,6 +45,7 @@ type CustomFieldInTaskRequest struct {
 type Task struct {
 	ID              string                 `json:"id"`
 	CustomID        string                 `json:"custom_id"`
+	CustomItemId    int                    `json:"custom_item_id"` // A null value means this item is a task. A value of 1 is a Milestone. Any other number is a custom task type.
 	Name            string                 `json:"name"`
 	TextContent     string                 `json:"text_content"`
 	Description     string                 `json:"description"`
