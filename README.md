@@ -58,7 +58,7 @@ cat > main.go <<-END
 	  }
     println(teams[0].ID)
 
-	  spaces, _, _ := client.Spaces.GetSpaces(context.Background(), teams[0].ID)
+	  spaces, _, _ := client.Spaces.GetSpaces(context.Background(), teams[0].ID, false)
 	  println(spaces[0].ID)
 
 	  space, _, _ := client.Spaces.GetSpace(context.Background(), spaces[0].ID)
