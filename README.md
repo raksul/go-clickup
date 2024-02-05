@@ -84,7 +84,7 @@ Contribution, in any kind of way, is highly welcome! It doesn't matter if you ar
 - Sharing the love of go-clickup and help people to get use to it
 - Writing test code
 
-If you are new to pull requests, checkout Collaborating on projects using issues and pull requests / Creating a pull request.
+If you are new to pull requests, checkout [Collaborating on projects using issues and pull requests / Creating a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests).
 
 ## Progress
 - [x] Rate Limit
@@ -209,6 +209,11 @@ If you are new to pull requests, checkout Collaborating on projects using issues
   - [ ] Edit User On Workspace
   - [ ] Remove User From Workspace
   - [ ] Get User
+- [x] User Groups
+  - [x] Get User Group
+  - [x] Create User Group
+  - [x] Update User Group
+  - [x] Delete User Group
 - [x] Views
   - [x] Create Team View
   - [x] Create Space View
