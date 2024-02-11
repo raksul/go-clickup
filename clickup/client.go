@@ -393,6 +393,8 @@ An ErrorResponse reports one or more errors caused by an API request.
 */
 type ErrorResponse struct {
 	Response *http.Response // HTTP response that caused this error
+	Err      string         `json:"err"`
+	ECode    string         `json:"ECODE"`
 	Message  string         `json:"message"` // error message
 	Errors   []Error        `json:"errors"`  // more detail on individual errors
 	// Block is only populated on certain types of errors such as code 451.
@@ -407,8 +409,7 @@ type ErrorBlock struct {
 
 func (r *ErrorResponse) Error() string {
 	return fmt.Sprintf("%v %v: %d %v %+v",
-		r.Response.Request.Method, sanitizeURL(r.Response.Request.URL),
-		r.Response.StatusCode, r.Message, r.Errors)
+		r.Response.Request.Method, sanitizeURL(r.Response.Request.URL), r.Response.StatusCode, r.Err, r.ECode)
 }
 
 // Is returns whether the provided error equals this error.
@@ -418,7 +419,7 @@ func (r *ErrorResponse) Is(target error) bool {
 		return false
 	}
 
-	if r.Message != v.Message || !compareHttpResponse(r.Response, v.Response) {
+	if r.Message != v.Message || !compareHttpResponse(r.Response, v.Response) || r.Err != v.Err || r.ECode != v.ECode {
 		return false
 	}
 
@@ -563,12 +564,12 @@ func CheckResponse(r *http.Response) error {
 		return nil
 	}
 	errorResponse := &ErrorResponse{Response: r}
-	data, err := ioutil.ReadAll(r.Body)
+	data, err := io.ReadAll(r.Body)
 	if err == nil && data != nil {
 		json.Unmarshal(data, errorResponse)
 	}
 
-	r.Body = ioutil.NopCloser(bytes.NewBuffer(data))
+	r.Body = io.NopCloser(bytes.NewBuffer(data))
 	switch {
 	case r.StatusCode == http.StatusTooManyRequests && r.Header.Get(headerRateRemaining) == "0":
 		return &RateLimitError{
