@@ -20,6 +20,7 @@ type GetBulkTasksTimeInStatusResponse map[string]TasksInStatus
 type TaskRequest struct {
 	Name                      string                     `json:"name,omitempty"`
 	Description               string                     `json:"description,omitempty"`
+	MarkdownDescription       string                     `json:"markdown_description,omitempty"`
 	Assignees                 []int                      `json:"assignees,omitempty"`
 	Tags                      []string                   `json:"tags,omitempty"`
 	Status                    string                     `json:"status,omitempty"`
