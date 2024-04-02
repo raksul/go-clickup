@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/raksul/go-clickup/clickup"
+	"github.com/dtylman/go-clickup/clickup"
 )
 
 func fetchFolders(spaceId string) ([]clickup.Folder, error) {

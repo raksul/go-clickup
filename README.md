@@ -1,6 +1,6 @@
 # go-clickup
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/raksul/go-clickup/clickup.svg)](https://pkg.go.dev/github.com/raksul/go-clickup/clickup)
+[![Go Reference](https://pkg.go.dev/badge/github.com/dtylman/go-clickup/clickup.svg)](https://pkg.go.dev/github.com/dtylman/go-clickup/clickup)
 
 This is unofficial [Go](https://golang.org/) client library for [ClickUp](https://clickup.com/).
 
@@ -22,7 +22,7 @@ https://clickup.com/api
 
 It is go gettable
 ```
-go get github.com/raksul/go-clickup
+go get github.com/dtylman/go-clickup
 ```
 
 ## Example
@@ -34,7 +34,7 @@ mkdir my-clickup-app && cd my-clickup-app
 cat > go.mod <<-END
   module my-clickup-app
 
-  require github.com/raksul/go-clickup main
+  require github.com/dtylman/go-clickup main
 END
 
 cat > main.go <<-END
@@ -43,7 +43,7 @@ cat > main.go <<-END
   import (
 	  "context"
 
-	  "github.com/raksul/go-clickup/clickup"
+	  "github.com/dtylman/go-clickup/clickup"
   )
 
   func main() {

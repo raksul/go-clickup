@@ -1,4 +1,4 @@
-module github.com/raksul/go-clickup
+module github.com/dtylman/go-clickup
 
 go 1.21.1
 

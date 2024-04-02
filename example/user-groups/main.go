@@ -7,7 +7,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/raksul/go-clickup/clickup"
+	"github.com/dtylman/go-clickup/clickup"
 )
 
 func fetchUserGroups() ([]clickup.UserGroup, error) {

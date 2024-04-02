@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/raksul/go-clickup/clickup"
+	"github.com/dtylman/go-clickup/clickup"
 )
 
 func fetchLists(folderId string) ([]clickup.List, error) {
