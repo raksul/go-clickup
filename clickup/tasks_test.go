@@ -23,6 +23,7 @@ func TestTasksService_GetTask(t *testing.T) {
     		    "name": "Task Name",
     		    "text_content": "New Task Description",
     		    "description": "New Task Description",
+				"markdown_description": "## New Task Description",
     		    "status": {
     		        "status": "in progress",
     		        "color": "#d3d3d3",
