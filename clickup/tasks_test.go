@@ -82,11 +82,11 @@ func TestTasksService_GetTask(t *testing.T) {
 	}
 
 	want := &Task{
-		ID:           "9hx",
-		CustomItemId: 0,
-		Name:         "Task Name",
-		TextContent:  "New Task Description",
-		Description:  "New Task Description",
+		ID:                  "9hx",
+		CustomItemId:        0,
+		Name:                "Task Name",
+		TextContent:         "New Task Description",
+		Description:         "New Task Description",
 		MarkdownDescription: "## New Task Description",
 		Status: TaskStatus{
 			Status:     "in progress",
