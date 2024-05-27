@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/raksul/go-clickup/clickup"
+	"github.com/gassara-kys/go-clickup/clickup"
 )
 
 func fetchTasks(listId string, options *clickup.GetTasksOptions) ([]clickup.Task, error) {

@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/raksul/go-clickup/clickup"
+	"github.com/gassara-kys/go-clickup/clickup"
 )
 
 func fetchTags(spaceId string) ([]clickup.Tag, error) {
