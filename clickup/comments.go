@@ -20,7 +20,7 @@ type UpdateCommentRequest struct {
 }
 
 type CreateCommentResponse struct {
-	ID     string `json:"id"`
+	ID     int    `json:"id"`
 	HistId string `json:"hist_id"`
 	Date   *Date  `json:"date"`
 }
@@ -35,7 +35,7 @@ type TaskCommentOptions struct {
 }
 
 type Comment struct {
-	ID          string             `json:"id"`
+	ID          int                `json:"id"`
 	Comment     []CommentInComment `json:"comment"`
 	CommentText string             `json:"comment_text"`
 	User        User               `json:"user"`

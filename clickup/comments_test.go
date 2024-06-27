@@ -44,7 +44,7 @@ func TestCommentsService_CreateTaskComment(t *testing.T) {
 		t.Errorf("Actions.ListArtifacts returned error: %v", err)
 	}
 
-	want := &CreateCommentResponse{ID: "458", HistId: "26508", Date: NewDateWithUnixTime(1568036964079)}
+	want := &CreateCommentResponse{ID: 458, HistId: "26508", Date: NewDateWithUnixTime(1568036964079)}
 	if !cmp.Equal(artifacts, want) {
 		t.Errorf("Actions.ListArtifacts returned %+v, want %+v", artifacts, want)
 	}
@@ -115,7 +115,7 @@ func TestCommentsService_GetTaskComments(t *testing.T) {
 		ProfilePicture: "https://attachments-public.clickup.com/profilePictures/183_abc.jpg",
 	}
 	comment := Comment{
-		ID:          "458",
+		ID:          458,
 		Comment:     []CommentInComment{{Text: "Task comment content"}},
 		CommentText: "Task comment content",
 		User:        user,
