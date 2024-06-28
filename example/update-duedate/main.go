@@ -27,17 +27,17 @@ func main() {
 	getTask(ctx, client, taskId)
 
 	fmt.Println("\nUpdate due date of the task to 2122/01/02 03:04:05:06")
-	updateTask(ctx, client, taskId, &clickup.TaskRequest{
+	updateTask(ctx, client, taskId, &clickup.TaskUpdateRequest{
 		DueDate: clickup.NewDate(
 			time.Date(2122, 1, 2, 3, 4, 5, 6, time.Now().Location()),
 		),
 	})
 
 	fmt.Println("\nUpdate the task with empty TaskRequest")
-	updateTask(ctx, client, taskId, &clickup.TaskRequest{})
+	updateTask(ctx, client, taskId, &clickup.TaskUpdateRequest{})
 
 	fmt.Println("\nRemove task due date with NullDate()")
-	updateTask(ctx, client, taskId, &clickup.TaskRequest{
+	updateTask(ctx, client, taskId, &clickup.TaskUpdateRequest{
 		DueDate: clickup.NullDate(),
 	})
 }
@@ -50,7 +50,7 @@ func getTask(ctx context.Context, client *clickup.Client, taskID string) {
 	fmt.Println(task.Name, task.DueDate)
 }
 
-func updateTask(ctx context.Context, client *clickup.Client, taskID string, tr *clickup.TaskRequest) {
+func updateTask(ctx context.Context, client *clickup.Client, taskID string, tr *clickup.TaskUpdateRequest) {
 	task, _, err := client.Tasks.UpdateTask(ctx, taskID, &clickup.GetTaskOptions{}, tr)
 	if err != nil {
 		log.Fatalln(err)

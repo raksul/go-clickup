@@ -37,6 +37,31 @@ type TaskRequest struct {
 	CustomItemId              int                        `json:"custom_item_id,omitempty"` // To create a task that doesn't use a custom task type, either don't include this field in the request body, or send 'null'. To create this task as a Milestone, send a value of 1. To use a custom task type, send the custom task type ID as defined in your Workspace, such as 2.
 }
 
+type TaskUpdateRequest struct {
+	Name                      string                     `json:"name,omitempty"`
+	Description               string                     `json:"description,omitempty"`
+	Assignees                 TaskAssigneeUpdateRequest  `json:"assignees,omitempty"`
+	Tags                      []string                   `json:"tags,omitempty"`
+	Status                    string                     `json:"status,omitempty"`
+	Priority                  int                        `json:"priority,omitempty"`
+	DueDate                   *Date                      `json:"due_date,omitempty"`
+	DueDateTime               bool                       `json:"due_date_time,omitempty"`
+	TimeEstimate              int                        `json:"time_estimate,omitempty"`
+	StartDate                 *Date                      `json:"start_date,omitempty"`
+	StartDateTime             bool                       `json:"start_date_time,omitempty"`
+	NotifyAll                 bool                       `json:"notify_all,omitempty"`
+	Parent                    string                     `json:"parent,omitempty"`
+	LinksTo                   string                     `json:"links_to,omitempty"`
+	CheckRequiredCustomFields bool                       `json:"check_required_custom_fields,omitempty"`
+	CustomFields              []CustomFieldInTaskRequest `json:"custom_fields,omitempty"`
+	CustomItemId              int                        `json:"custom_item_id,omitempty"` // To create a task that doesn't use a custom task type, either don't include this field in the request body, or send 'null'. To create this task as a Milestone, send a value of 1. To use a custom task type, send the custom task type ID as defined in your Workspace, such as 2.
+}
+
+type TaskAssigneeUpdateRequest struct {
+	Add []int `json:"add,omitempty"`
+	Rem []int `json:"rem,omitempty"`
+}
+
 type CustomFieldInTaskRequest struct {
 	ID    string      `json:"id"`
 	Value interface{} `json:"value"`
@@ -283,7 +308,7 @@ func (s *TasksService) CreateTask(ctx context.Context, listID string, tr *TaskRe
 }
 
 // FIXME: assignees add/rem
-func (s *TasksService) UpdateTask(ctx context.Context, taskID string, opts *GetTaskOptions, tr *TaskRequest) (*Task, *Response, error) {
+func (s *TasksService) UpdateTask(ctx context.Context, taskID string, opts *GetTaskOptions, tr *TaskUpdateRequest) (*Task, *Response, error) {
 	u := fmt.Sprintf("task/%v/", taskID)
 	u, err := addOptions(u, opts)
 	if err != nil {
