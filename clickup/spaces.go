@@ -25,7 +25,7 @@ type DueDates struct {
 	RemapClosedDueDate bool `json:"remap_closed_due_date"`
 }
 
-type TimeTrackingFeature struct {
+type TimeTracking struct {
 	Enabled bool `json:"enabled"`
 }
 
@@ -60,15 +60,15 @@ type Portfolios struct {
 }
 
 type Features struct {
-	DueDates          DueDates            `json:"due_dates"`
-	TimeTracking      TimeTrackingFeature `json:"time_tracking"`
-	Tags              Tags                `json:"tags"`
-	TimeEstimates     TimeEstimates       `json:"time_estimates"`
-	Checklists        Checklists          `json:"checklists"`
-	CustomFields      CustomFields        `json:"custom_fields"`
-	RemapDependencies RemapDependencies   `json:"remap_dependencies"`
-	DependencyWarning DependencyWarning   `json:"dependency_warning"`
-	Portfolios        Portfolios          `json:"portfolios"`
+	DueDates          DueDates          `json:"due_dates"`
+	TimeTracking      TimeTracking      `json:"time_tracking"`
+	Tags              Tags              `json:"tags"`
+	TimeEstimates     TimeEstimates     `json:"time_estimates"`
+	Checklists        Checklists        `json:"checklists"`
+	CustomFields      CustomFields      `json:"custom_fields"`
+	RemapDependencies RemapDependencies `json:"remap_dependencies"`
+	DependencyWarning DependencyWarning `json:"dependency_warning"`
+	Portfolios        Portfolios        `json:"portfolios"`
 }
 
 type Space struct {
@@ -88,7 +88,7 @@ type Space struct {
 		Sprints  struct {
 			Enabled bool `json:"enabled"`
 		} `json:"sprints"`
-		TimeTracking TimeTrackingFeature `json:"time_tracking"`
+		TimeTracking TimeTracking `json:"time_tracking"`
 		Points       struct {
 			Enabled bool `json:"enabled"`
 		} `json:"points"`

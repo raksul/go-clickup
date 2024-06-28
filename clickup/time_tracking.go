@@ -8,7 +8,11 @@ import (
 type TimeTrackingsService service
 
 type GetTimeTrackingResponse struct {
-	Data []TimeTracking `json:"data"`
+	Data TimeTrackingData `json:"data"`
+}
+
+type CreateTimeTrackingResponse struct {
+	Data TimeTrackingData `json:"data"`
 }
 
 // See https://clickup.com/api/clickupreference/operation/Createatimeentry/
@@ -31,19 +35,21 @@ type TimeTrackingTag struct {
 	Creator int    `json:"creator"`
 }
 
-type TimeTracking struct {
+type TimeTrackingData struct {
 	ID           string            `json:"id"`
 	Wid          string            `json:"wid"`
 	User         User              `json:"user"`
 	Billable     bool              `json:"billable"`
-	Start        string            `json:"start"`
+	Start        int               `json:"start"`
 	End          string            `json:"end"`
-	Duration     string            `json:"duration"`
+	Duration     int               `json:"duration"`
 	Description  string            `json:"description"`
 	Source       string            `json:"source"`
-	At           string            `json:"at"`
+	At           int               `json:"at"`
+	IsLocked     bool              `json:"is_locked"`
 	TaskLocation TaskLocation      `json:"task_location"`
-	Task         []TimeTrackingTag `json:"task_"`
+	Task         Task              `json:"task"`
+	Tags         []TimeTrackingTag `json:"tags"`
 	TaskURL      string            `json:"task_url"`
 }
 
@@ -61,7 +67,7 @@ type CreateTimeTrackingOptions struct {
 	TeamID        int  `url:"team_id,omitempty"`
 }
 
-func (s *TimeTrackingsService) CreateTimeTracking(ctx context.Context, teamID string, opts *CreateTimeTrackingOptions, ttr *TimeTrackingRequest) (*TimeTracking, *Response, error) {
+func (s *TimeTrackingsService) CreateTimeTracking(ctx context.Context, teamID string, opts *CreateTimeTrackingOptions, ttr *TimeTrackingRequest) (*CreateTimeTrackingResponse, *Response, error) {
 	u := fmt.Sprintf("team/%s/time_entries", teamID)
 	u, err := addOptions(u, opts)
 	if err != nil {
@@ -73,7 +79,7 @@ func (s *TimeTrackingsService) CreateTimeTracking(ctx context.Context, teamID st
 		return nil, nil, err
 	}
 
-	timeTracking := new(TimeTracking)
+	timeTracking := new(CreateTimeTrackingResponse)
 	resp, err := s.client.Do(ctx, req, timeTracking)
 	if err != nil {
 		return nil, resp, err

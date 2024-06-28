@@ -31,7 +31,7 @@ func TestCommentsService_CreateTaskComment(t *testing.T) {
 
 		fmt.Fprint(w,
 			`{
-				"id": "458",
+				"id": 458,
   				"hist_id": "26508",
   				"date": 1568036964079
 			}`,
@@ -60,7 +60,7 @@ func TestCommentsService_GetTaskComments(t *testing.T) {
 			`{
 				"comments": [
 					{
-					  "id": "458",
+					  "id": 458,
 					  "comment": [
 						{
 						  "text": "Task comment content"
