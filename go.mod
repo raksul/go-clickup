@@ -1,6 +1,6 @@
 module github.com/raksul/go-clickup
 
-go 1.21.1
+go 1.22.3
 
 require (
 	github.com/google/go-cmp v0.5.8
