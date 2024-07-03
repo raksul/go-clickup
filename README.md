@@ -192,10 +192,10 @@ If you are new to pull requests, checkout [Collaborating on projects using issue
   - [x] Get Workspace Plan
 - [ ] Time Tracking 2.0
   - [ ] Get time entries within a date range
-  - [ ] Get singular time entry
+  - [x] Get singular time entry
   - [ ] Get time entry history
   - [ ] Get running time entry
-  - [ ] Create a time entry
+  - [x] Create a time entry
   - [ ] Remove tags from time entries
   - [ ] Get all tags from time entries
   - [ ] Add tags from time entries
