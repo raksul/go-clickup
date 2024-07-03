@@ -8,7 +8,7 @@ import (
 type TimeTrackingsService service
 
 type GetTimeTrackingResponse struct {
-	Data TimeTrackingData `json:"data"`
+	Data GetTimeTrackingData `json:"data"`
 }
 
 type CreateTimeTrackingResponse struct {
@@ -53,6 +53,24 @@ type TimeTrackingData struct {
 	TaskURL      string            `json:"task_url"`
 }
 
+type GetTimeTrackingData struct {
+	ID           string            `json:"id"`
+	Wid          string            `json:"wid"`
+	User         User              `json:"user"`
+	Billable     bool              `json:"billable"`
+	Start        string            `json:"start"`
+	End          string            `json:"end"`
+	Duration     string            `json:"duration"`
+	Description  string            `json:"description"`
+	Source       string            `json:"source"`
+	At           string            `json:"at"`
+	IsLocked     bool              `json:"is_locked"`
+	TaskLocation GetTaskLocation   `json:"task_location"`
+	Task         Task              `json:"task"`
+	Tags         []TimeTrackingTag `json:"tags"`
+	TaskURL      string            `json:"task_url"`
+}
+
 type TaskLocation struct {
 	ListID     int    `json:"list_id"`
 	FolderID   int    `json:"folder_id"`
@@ -62,9 +80,23 @@ type TaskLocation struct {
 	SpaceName  string `json:"space_name"`
 }
 
+type GetTaskLocation struct {
+	ListID     string `json:"list_id"`
+	FolderID   string `json:"folder_id"`
+	SpaceID    string `json:"space_id"`
+	ListName   string `json:"list_name"`
+	FolderName string `json:"folder_name"`
+	SpaceName  string `json:"space_name"`
+}
+
 type CreateTimeTrackingOptions struct {
 	CustomTaskIDs bool `url:"custom_task_ids,omitempty"`
 	TeamID        int  `url:"team_id,omitempty"`
+}
+
+type GetTimeTrackingOptions struct {
+	IncludeTask          bool `url:"include_task_,omitempty"`
+	IncludeLocationNames bool `url:"include_location_names,omitempty"`
 }
 
 func (s *TimeTrackingsService) CreateTimeTracking(ctx context.Context, teamID string, opts *CreateTimeTrackingOptions, ttr *TimeTrackingRequest) (*CreateTimeTrackingResponse, *Response, error) {
@@ -88,14 +120,14 @@ func (s *TimeTrackingsService) CreateTimeTracking(ctx context.Context, teamID st
 	return timeTracking, resp, nil
 }
 
-func (s *TimeTrackingsService) GetTimeTracking(ctx context.Context, teamID string, timerID string, opts *CreateTimeTrackingOptions, ttr *TimeTrackingRequest) (*GetTimeTrackingResponse, *Response, error) {
+func (s *TimeTrackingsService) GetSingularTimeEntry(ctx context.Context, teamID string, timerID string, opts *GetTimeTrackingOptions) (*GetTimeTrackingResponse, *Response, error) {
 	u := fmt.Sprintf("team/%s/time_entries/%s", teamID, timerID)
 	u, err := addOptions(u, opts)
 	if err != nil {
 		return nil, nil, err
 	}
 
-	req, err := s.client.NewRequest("GET", u, ttr)
+	req, err := s.client.NewRequest("GET", u, nil)
 	if err != nil {
 		return nil, nil, err
 	}
