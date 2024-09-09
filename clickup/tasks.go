@@ -20,6 +20,7 @@ type GetBulkTasksTimeInStatusResponse map[string]TasksInStatus
 type TaskRequest struct {
 	Name                      string                     `json:"name,omitempty"`
 	Description               string                     `json:"description,omitempty"`
+	MarkdownDescription       string                     `json:"markdown_description,omitempty"`
 	Assignees                 []int                      `json:"assignees,omitempty"`
 	Tags                      []string                   `json:"tags,omitempty"`
 	Status                    string                     `json:"status,omitempty"`
@@ -68,41 +69,42 @@ type CustomFieldInTaskRequest struct {
 }
 
 type Task struct {
-	ID              string                 `json:"id"`
-	CustomID        string                 `json:"custom_id"`
-	CustomItemId    int                    `json:"custom_item_id"` // A null value means this item is a task. A value of 1 is a Milestone. Any other number is a custom task type.
-	Name            string                 `json:"name"`
-	TextContent     string                 `json:"text_content"`
-	Description     string                 `json:"description"`
-	Status          TaskStatus             `json:"status"`
-	Orderindex      json.Number            `json:"orderindex"`
-	DateCreated     string                 `json:"date_created"`
-	DateUpdated     string                 `json:"date_updated"`
-	DateClosed      string                 `json:"date_closed"`
-	Archived        bool                   `json:"archived"`
-	Creator         User                   `json:"creator"`
-	Assignees       []User                 `json:"assignees,omitempty"`
-	Watchers        []User                 `json:"watchers,omitempty"`
-	Checklists      []Checklist            `json:"checklists,omitempty"`
-	Tags            []Tag                  `json:"tags,omitempty"`
-	Parent          string                 `json:"parent"`
-	Priority        TaskPriority           `json:"priority"`
-	DueDate         *Date                  `json:"due_date,omitempty"`
-	StartDate       string                 `json:"start_date,omitempty"`
-	Points          Point                  `json:"points,omitempty"`
-	TimeEstimate    int64                  `json:"time_estimate"`
-	TimeSpent       int64                  `json:"time_spent"`
-	CustomFields    []CustomField          `json:"custom_fields"`
-	Dependencies    []Dependence           `json:"dependencies"`
-	LinkedTasks     []LinkedTask           `json:"linked_tasks"`
-	TeamID          string                 `json:"team_id"`
-	URL             string                 `json:"url"`
-	PermissionLevel string                 `json:"permission_level"`
-	List            ListOfTaskBelonging    `json:"list"`
-	Project         ProjectOfTaskBelonging `json:"project"`
-	Folder          FolderOftaskBelonging  `json:"folder"`
-	Space           SpaceOfTaskBelonging   `json:"space"`
-	Attachments     []TaskAttachment       `json:"attachments"`
+	ID                  string                 `json:"id"`
+	CustomID            string                 `json:"custom_id"`
+	CustomItemId        int                    `json:"custom_item_id"` // A null value means this item is a task. A value of 1 is a Milestone. Any other number is a custom task type.
+	Name                string                 `json:"name"`
+	TextContent         string                 `json:"text_content"`
+	Description         string                 `json:"description"`
+	MarkdownDescription string                 `json:"markdown_description"`
+	Status              TaskStatus             `json:"status"`
+	Orderindex          json.Number            `json:"orderindex"`
+	DateCreated         string                 `json:"date_created"`
+	DateUpdated         string                 `json:"date_updated"`
+	DateClosed          string                 `json:"date_closed"`
+	Archived            bool                   `json:"archived"`
+	Creator             User                   `json:"creator"`
+	Assignees           []User                 `json:"assignees,omitempty"`
+	Watchers            []User                 `json:"watchers,omitempty"`
+	Checklists          []Checklist            `json:"checklists,omitempty"`
+	Tags                []Tag                  `json:"tags,omitempty"`
+	Parent              string                 `json:"parent"`
+	Priority            TaskPriority           `json:"priority"`
+	DueDate             *Date                  `json:"due_date,omitempty"`
+	StartDate           string                 `json:"start_date,omitempty"`
+	Points              Point                  `json:"points,omitempty"`
+	TimeEstimate        int64                  `json:"time_estimate"`
+	TimeSpent           int64                  `json:"time_spent"`
+	CustomFields        []CustomField          `json:"custom_fields"`
+	Dependencies        []Dependence           `json:"dependencies"`
+	LinkedTasks         []LinkedTask           `json:"linked_tasks"`
+	TeamID              string                 `json:"team_id"`
+	URL                 string                 `json:"url"`
+	PermissionLevel     string                 `json:"permission_level"`
+	List                ListOfTaskBelonging    `json:"list"`
+	Project             ProjectOfTaskBelonging `json:"project"`
+	Folder              FolderOftaskBelonging  `json:"folder"`
+	Space               SpaceOfTaskBelonging   `json:"space"`
+	Attachments         []TaskAttachment       `json:"attachments"`
 }
 
 type TaskAttachment struct {
